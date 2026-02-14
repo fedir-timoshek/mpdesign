@@ -1,12 +1,31 @@
 {
-  "name": "mpdesign-site",
+  "name": "mpdesign-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ux": "playwright test tests/e2e/ux-quality.spec.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "release:check": "npm run content:audit && npm run content:audit:strict && npm run lint && npm run typecheck && npm run test && npm run test:e2e && npm run build",
+    "smoke:site": "bash scripts/smoke-check.sh",
+    "content:generate": "node scripts/generate-local-content.mjs",
+    "content:sync:witraz": "node scripts/sync-witraz-content.mjs",
+    "content:localize:images": "node scripts/localize-supplier-images.mjs",
+    "content:enrich:experience": "node scripts/enrich-product-experience.mjs",
+    "content:audit": "node scripts/audit-content-integrity.mjs",
+    "content:audit:strict": "node scripts/audit-content-integrity.mjs --strict-placeholders --strict-palette"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -14,13 +33,17 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@playwright/test": "^1.56.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "jsdom": "^26.1.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }
