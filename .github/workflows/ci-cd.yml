@@ -86,9 +86,22 @@ jobs:
           HETZNER_PASSWORD: ${{ secrets.HETZNER_PASSWORD }}
           HETZNER_PATH: ${{ secrets.HETZNER_STAGING_PATH }}
         run: |
-          lftp -u "$HETZNER_USERNAME","$HETZNER_PASSWORD" sftp://$HETZNER_HOST <<'LFTP'
+          # Normalize legacy Hetzner paths.
+          # On Hetzner Webhosting, the SFTP user home typically maps to `public_html/`,
+          # so paths like `public_html/staging` should actually be `/staging`.
+          REMOTE_PATH="${HETZNER_PATH#public_html/}"
+          REMOTE_PATH="${REMOTE_PATH#public_html}"
+          if [ -z "$REMOTE_PATH" ]; then
+            REMOTE_PATH="/"
+          fi
+          case "$REMOTE_PATH" in
+            /*) : ;;
+            *) REMOTE_PATH="/$REMOTE_PATH" ;;
+          esac
+
+          lftp -u "$HETZNER_USERNAME","$HETZNER_PASSWORD" sftp://$HETZNER_HOST <<LFTP
           set sftp:auto-confirm yes
-          mirror -R --delete --parallel=2 out "$HETZNER_PATH"
+          mirror -R --delete --parallel=2 out "$REMOTE_PATH"
           bye
           LFTP
 
@@ -128,9 +141,22 @@ jobs:
           HETZNER_PASSWORD: ${{ secrets.HETZNER_PASSWORD }}
           HETZNER_PATH: ${{ secrets.HETZNER_PRODUCTION_PATH }}
         run: |
-          lftp -u "$HETZNER_USERNAME","$HETZNER_PASSWORD" sftp://$HETZNER_HOST <<'LFTP'
+          # Normalize legacy Hetzner paths.
+          # On Hetzner Webhosting, the SFTP user home typically maps to `public_html/`,
+          # so paths like `public_html` should actually be `/`.
+          REMOTE_PATH="${HETZNER_PATH#public_html/}"
+          REMOTE_PATH="${REMOTE_PATH#public_html}"
+          if [ -z "$REMOTE_PATH" ]; then
+            REMOTE_PATH="/"
+          fi
+          case "$REMOTE_PATH" in
+            /*) : ;;
+            *) REMOTE_PATH="/$REMOTE_PATH" ;;
+          esac
+
+          lftp -u "$HETZNER_USERNAME","$HETZNER_PASSWORD" sftp://$HETZNER_HOST <<LFTP
           set sftp:auto-confirm yes
-          mirror -R --delete --parallel=2 out "$HETZNER_PATH"
+          mirror -R --delete --parallel=2 out "$REMOTE_PATH"
           bye
           LFTP
 
