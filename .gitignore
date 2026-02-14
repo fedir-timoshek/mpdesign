@@ -15,6 +15,10 @@
 /playwright-report
 /test-results
 
+# playwright-cli artifacts and saved auth state (contains cookies / localStorage)
+/output/playwright/
+/.playwright-cli/
+
 # next.js
 /.next/
 /out/

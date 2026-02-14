@@ -1,6 +1,6 @@
 # Content Integrity Report
 
-Generated: 2026-02-14T15:38:07.685Z
+Generated: 2026-02-14T16:10:04.913Z
 Strict placeholders: on
 Strict palette coverage: on
 

@@ -14,6 +14,16 @@
   - input: `locale, sourcePage, productSlug, name, phone, email, message, consent, honeypot`
   - output: `{ ok, leadId, timestamp, errorCode }`
 
+### Browser CORS note (important)
+
+Apps Script Web Apps return CORS headers for `POST`, but **do not** handle `OPTIONS` preflight.
+So the frontend must send a "simple request":
+
+- send the JSON payload as a plain string body
+- do **not** set `Content-Type: application/json`
+
+See `/Users/ftimoshek/Desktop/MPDesign/проект/src/components/lead-form.tsx`.
+
 ## Telegram setup
 
 In Apps Script > Project Settings > Script Properties:

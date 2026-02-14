@@ -10,14 +10,18 @@
 - `HETZNER_HOST`
 - `HETZNER_USERNAME`
 - `HETZNER_PASSWORD`
-- `HETZNER_STAGING_PATH` (example `/public_html/staging`)
-- `HETZNER_PRODUCTION_PATH` (example `/public_html`)
+- `HETZNER_STAGING_PATH` (example `/staging`)
+- `HETZNER_PRODUCTION_PATH` (example `/`)
 - `HETZNER_STAGING_URL` (example `https://staging.example.com` or `https://example.com/staging`)
 - `HETZNER_PRODUCTION_URL` (example `https://example.com`)
 - `NEXT_PUBLIC_SITE_URL` (production canonical domain)
 - `NEXT_PUBLIC_LEAD_ENDPOINT`
 - `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` (optional)
 - `CONTENT_API_URL` (optional)
+
+Notes:
+- On Hetzner Webhosting, the SFTP user home directory typically maps to `public_html/`.
+  That is why `HETZNER_PRODUCTION_PATH` is usually `/` (not `/public_html`) and staging is `/staging`.
 
 ## Build Artifact
 
@@ -60,4 +64,3 @@ npm run smoke:site -- https://example.com
 1. Re-run deployment for last stable production tag.
 2. If workflow artifact is unavailable, upload previous `out/` snapshot via SFTP.
 3. Re-run smoke checks against recovered version.
-

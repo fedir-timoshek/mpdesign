@@ -110,11 +110,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
     };
 
     try {
+      // Google Apps Script Web App does not support CORS preflight (OPTIONS).
+      // Sending JSON as text avoids preflight and still lets the backend parse JSON.
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(payload),
       });
 
