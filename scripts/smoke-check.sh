@@ -31,6 +31,22 @@ FR_HTML="$(curl -fsSL --max-time 20 "$BASE_URL/fr/windows/pvc/")"
 DE_HTML="$(curl -fsSL --max-time 20 "$BASE_URL/de/windows/pvc/")"
 SITEMAP_XML="$(curl -fsSL --max-time 20 "$BASE_URL/sitemap.xml")"
 
+# Ensure the HTML references a real build artifact (prevents partial deploys where
+# HTML from an older build points to deleted chunk files).
+FR_CSS="$(python3 -c "import re,sys; html=sys.stdin.read(); m=re.search(r'rel=\"stylesheet\" href=\"([^\"]+)\"', html); print(m.group(1) if m else '')" 2>/dev/null <<<\"$FR_HTML\" || true)"
+if [[ -z "$FR_CSS" ]]; then
+  echo "Missing stylesheet link in $BASE_URL/fr/windows/pvc/" >&2
+  exit 1
+fi
+check_url "$BASE_URL$FR_CSS"
+
+FR_JS="$(python3 -c "import re,sys; html=sys.stdin.read(); m=re.search(r'src=\"(/_next/static/chunks/[^\"]+\\.js)\"', html); print(m.group(1) if m else '')" 2>/dev/null <<<\"$FR_HTML\" || true)"
+if [[ -z "$FR_JS" ]]; then
+  echo "Missing script chunk link in $BASE_URL/fr/windows/pvc/" >&2
+  exit 1
+fi
+check_url "$BASE_URL$FR_JS"
+
 if [[ "${SMOKE_EXPECT_NOINDEX:-}" == "1" ]]; then
   # Avoid pipelines here to prevent SIGPIPE when grep exits early under `set -o pipefail`.
   grep -Eiq '^Disallow:\s*/\s*$' <<<"$ROBOTS_TXT"
