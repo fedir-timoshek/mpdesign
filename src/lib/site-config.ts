@@ -248,19 +248,19 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "impressum",
       title: "Mentions legales",
       intro:
-        "Cette page contient des donnees provisoires. Remplacer par les informations officielles avant la mise en production.",
+        "Informations legales relatives a l'editeur du site, au contact et a l'hebergement.",
       sections: [
         {
           heading: "Editeur du site",
-          body: "MP design Sarl, adresse complete (a confirmer), numero CHE (a confirmer), representant legal (a confirmer).",
+          body: "MP Design Sarl, Chemin de la Sauge 6, 2537 Vauffelin, Suisse. CHE-137.134.279.",
         },
         {
           heading: "Contact",
-          body: "lior.solomonchuk@gmail.com, +41 76 304 81 12, responsable de publication (a confirmer).",
+          body: "Email: lior.solomonchuk@gmail.com. Telephone: +41 76 304 81 12.",
         },
         {
           heading: "Hebergement",
-          body: "Hetzner Webhosting S, informations contractuelles du titulaire.",
+          body: "Hetzner Webhosting S (hebergement du site).",
         },
       ],
     },
@@ -268,19 +268,27 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "datenschutz",
       title: "Protection des donnees",
       intro:
-        "Politique de confidentialite a finaliser selon vos donnees reels et vos processus internes.",
+        "Cette page explique quelles donnees nous collectons et comment nous les utilisons pour repondre a vos demandes.",
       sections: [
         {
+          heading: "Responsable du traitement",
+          body: "MP Design Sarl, Chemin de la Sauge 6, 2537 Vauffelin, Suisse. Contact: lior.solomonchuk@gmail.com.",
+        },
+        {
           heading: "Donnees collectees",
-          body: "Nom, telephone, email, message projet, metadata techniques minimales.",
+          body: "Nom, telephone (optionnel), email, message, ainsi que des informations techniques minimales (page source, langue).",
         },
         {
           heading: "Finalite",
           body: "Reponse commerciale, qualification de besoin, suivi projet et obligations legales.",
         },
         {
+          heading: "Prestataires",
+          body: "Les demandes envoyees via le formulaire sont enregistrees dans Google Sheets (Google Apps Script). Des notifications peuvent etre envoyees via Telegram.",
+        },
+        {
           heading: "Conservation et droits",
-          body: "Duree de conservation, droit d'acces, rectification, suppression et point de contact RGPD/LPD.",
+          body: "Nous conservons les donnees le temps necessaire au traitement de votre demande et a nos obligations. Vous pouvez demander l'acces, la rectification ou la suppression via lior.solomonchuk@gmail.com.",
         },
       ],
     },
@@ -288,7 +296,7 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "cookies",
       title: "Cookies",
       intro:
-        "Version v1: mesure d'audience via Cloudflare Web Analytics sans banniere cookies intrusive.",
+        "Informations sur l'utilisation de cookies et de mesure d'audience.",
       sections: [
         {
           heading: "Cookies strictement necessaires",
@@ -296,7 +304,7 @@ export const legalPages: Record<Locale, LegalPage[]> = {
         },
         {
           heading: "Mesure d'audience",
-          body: "Cloudflare Web Analytics, collecte agregée sans profilage publicitaire.",
+          body: "Cloudflare Web Analytics pour des statistiques d'audience (sans profilage publicitaire).",
         },
         {
           heading: "Gestion",
@@ -310,19 +318,19 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "impressum",
       title: "Impressum",
       intro:
-        "Diese Seite enthaelt Platzhalterdaten. Vor dem Go-Live mit den offiziellen Unternehmensdaten ersetzen.",
+        "Rechtliche Informationen zum Anbieter, Kontakt und Hosting.",
       sections: [
         {
           heading: "Anbieter",
-          body: "MP design Sarl, vollstaendige Adresse (zu bestaetigen), CHE-Nummer (zu bestaetigen), vertretungsberechtigte Person (zu bestaetigen).",
+          body: "MP Design Sarl, Chemin de la Sauge 6, 2537 Vauffelin, Schweiz. CHE-137.134.279.",
         },
         {
           heading: "Kontakt",
-          body: "lior.solomonchuk@gmail.com, +41 76 304 81 12, verantwortliche Person fuer Inhalte (zu bestaetigen).",
+          body: "E-Mail: lior.solomonchuk@gmail.com. Telefon: +41 76 304 81 12.",
         },
         {
           heading: "Hosting",
-          body: "Hetzner Webhosting S, vertragliche Inhaberdaten des Accounts.",
+          body: "Hetzner Webhosting S (Hosting des Webauftritts).",
         },
       ],
     },
@@ -330,19 +338,27 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "datenschutz",
       title: "Datenschutz",
       intro:
-        "Datenschutztext in v1 mit Platzhaltern. Vor Produktion auf Ihre realen Prozesse anpassen.",
+        "Diese Seite beschreibt, welche personenbezogenen Daten wir verarbeiten und zu welchen Zwecken.",
       sections: [
         {
+          heading: "Verantwortlicher",
+          body: "MP Design Sarl, Chemin de la Sauge 6, 2537 Vauffelin, Schweiz. Kontakt: lior.solomonchuk@gmail.com.",
+        },
+        {
           heading: "Erhobene Daten",
-          body: "Name, Telefon, E-Mail, Projektnachricht sowie minimale technische Metadaten.",
+          body: "Name, Telefon (optional), E-Mail, Nachricht sowie minimale technische Metadaten (Quelle, Sprache).",
         },
         {
           heading: "Zwecke",
           body: "Bearbeitung von Anfragen, Projektberatung, Angebotsprozess und gesetzliche Pflichten.",
         },
         {
+          heading: "Dienstleister",
+          body: "Formularanfragen werden in Google Sheets gespeichert (Google Apps Script). Benachrichtigungen koennen via Telegram gesendet werden.",
+        },
+        {
           heading: "Speicherung und Rechte",
-          body: "Aufbewahrungsfristen, Auskunft, Berichtigung, Loeschung und Ansprechpartner fuer DSG/DSGVO.",
+          body: "Wir speichern Daten nur so lange wie notwendig. Sie koennen Auskunft, Berichtigung oder Loeschung per E-Mail anfordern: lior.solomonchuk@gmail.com.",
         },
       ],
     },
@@ -350,7 +366,7 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "cookies",
       title: "Cookies",
       intro:
-        "Version v1 verwendet Cloudflare Web Analytics mit datenschutzfreundlicher Messung.",
+        "Hinweise zur Verwendung von Cookies und Reichweitenmessung.",
       sections: [
         {
           heading: "Technisch notwendige Cookies",
@@ -358,7 +374,7 @@ export const legalPages: Record<Locale, LegalPage[]> = {
         },
         {
           heading: "Reichweitenmessung",
-          body: "Cloudflare Web Analytics mit aggregierten Kennzahlen ohne Werbeprofiling.",
+          body: "Cloudflare Web Analytics fuer aggregierte Kennzahlen ohne Werbeprofiling.",
         },
         {
           heading: "Steuerung",
