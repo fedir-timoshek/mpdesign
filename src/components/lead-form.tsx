@@ -172,9 +172,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
             value={state.name}
             placeholder={copy.placeholders.name}
             autoComplete="name"
-            onChange={(event) =>
-              setState((prev) => ({ ...prev, name: event.currentTarget.value }))
-            }
+            onChange={(event) => {
+              const value = event.currentTarget.value;
+              setState((prev) => ({ ...prev, name: value }));
+            }}
             required
           />
         </label>
@@ -187,9 +188,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
             value={state.phone}
             placeholder={copy.placeholders.phone}
             autoComplete="tel"
-            onChange={(event) =>
-              setState((prev) => ({ ...prev, phone: event.currentTarget.value }))
-            }
+            onChange={(event) => {
+              const value = event.currentTarget.value;
+              setState((prev) => ({ ...prev, phone: value }));
+            }}
           />
         </label>
       </div>
@@ -202,9 +204,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
           value={state.email}
           placeholder={copy.placeholders.email}
           autoComplete="email"
-          onChange={(event) =>
-            setState((prev) => ({ ...prev, email: event.currentTarget.value }))
-          }
+          onChange={(event) => {
+            const value = event.currentTarget.value;
+            setState((prev) => ({ ...prev, email: value }));
+          }}
           required
         />
       </label>
@@ -216,9 +219,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
           value={state.message}
           placeholder={copy.placeholders.message}
           rows={5}
-          onChange={(event) =>
-            setState((prev) => ({ ...prev, message: event.currentTarget.value }))
-          }
+          onChange={(event) => {
+            const value = event.currentTarget.value;
+            setState((prev) => ({ ...prev, message: value }));
+          }}
           required
         />
       </label>
@@ -227,9 +231,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
         <input
           type="checkbox"
           checked={state.consent}
-          onChange={(event) =>
-            setState((prev) => ({ ...prev, consent: event.currentTarget.checked }))
-          }
+          onChange={(event) => {
+            const checked = event.currentTarget.checked;
+            setState((prev) => ({ ...prev, consent: checked }));
+          }}
         />
         <span>{copy.fields.consent}</span>
       </label>
@@ -240,9 +245,10 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
           tabIndex={-1}
           autoComplete="off"
           value={state.honeypot}
-          onChange={(event) =>
-            setState((prev) => ({ ...prev, honeypot: event.currentTarget.value }))
-          }
+          onChange={(event) => {
+            const value = event.currentTarget.value;
+            setState((prev) => ({ ...prev, honeypot: value }));
+          }}
         />
       </label>
 

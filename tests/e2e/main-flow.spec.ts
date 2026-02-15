@@ -14,6 +14,21 @@ test("fr homepage has lead form and catalog links", async ({ page }) => {
   await expect(cards.first()).toBeVisible();
 });
 
+test("lead form fields can be filled without crashing", async ({ page }) => {
+  await page.goto("/fr/");
+
+  await page.getByRole("textbox", { name: /nom complet/i }).fill("E2E Test");
+  await page.getByRole("textbox", { name: /telephone/i }).fill("+41 79 000 00 00");
+  await page.getByRole("textbox", { name: /^email/i }).fill("e2e@example.com");
+  await page
+    .getByRole("textbox", { name: /votre projet/i })
+    .fill("Test lead form typing without submission.");
+
+  // If React throws during hydration or input events, Next's exported runtime shows an "Application error" page.
+  await expect(page.getByText(/Application error/i)).toHaveCount(0);
+  await expect(page.locator("#lead-form")).toBeVisible();
+});
+
 test("de category page renders products", async ({ page }) => {
   await page.goto("/de/windows/pvc/");
 
