@@ -9,8 +9,9 @@
 - [ ] Confirm `src/data/content.local.json` has:
 - [ ] 0 remote media URLs
 - [ ] 0 placeholder specs/text
-- [ ] 47 products
+- [ ] 133 products
 - [ ] Confirm static export contains `out/robots.txt`, `out/sitemap.xml`, `out/fr/`, `out/de/`
+- [ ] Staging build has `robots.txt` with `Disallow: /` (noindex staging)
 - [ ] Confirm canonical/hreflang on:
 - [ ] `/fr/windows/pvc/`
 - [ ] `/de/windows/pvc/`
@@ -58,4 +59,3 @@
 - [ ] Re-run workflow for last stable release tag
 - [ ] If needed, upload previous `out/` artifact manually via SFTP
 - [ ] Re-run smoke check against restored version
-

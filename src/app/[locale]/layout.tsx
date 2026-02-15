@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import { CtaTracker } from "@/components/cta-tracker";
 import { MobileStickyCta } from "@/components/mobile-sticky-cta";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -33,6 +34,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <main>{children}</main>
       <SiteFooter locale={locale as Locale} />
       <MobileStickyCta locale={locale as Locale} contact={contactConfig} />
+      <CtaTracker locale={locale as Locale} />
     </div>
   );
 }

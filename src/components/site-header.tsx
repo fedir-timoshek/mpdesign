@@ -34,11 +34,24 @@ export function SiteHeader({ locale, showShutters }: Props) {
           <Link href={`/${locale}/windows/aluminum`}>{nav.aluminum}</Link>
           {showShutters ? <Link href={`/${locale}/shutters`}>{nav.shutters}</Link> : null}
           <Link href={`/${locale}/doors`}>{nav.doors}</Link>
-          <a href="#lead-form">{nav.contact}</a>
+          <a
+            href="#lead-form"
+            data-mpdesign-cta="1"
+            data-mpdesign-cta-channel="form"
+            data-mpdesign-cta-placement="header_contact"
+          >
+            {nav.contact}
+          </a>
         </nav>
 
         <div className="header-actions">
-          <a className="btn btn-ghost" href="#lead-form">
+          <a
+            className="btn btn-ghost"
+            href="#lead-form"
+            data-mpdesign-cta="1"
+            data-mpdesign-cta-channel="form"
+            data-mpdesign-cta-placement="header_quote"
+          >
             {nav.quote}
           </a>
           <LanguageSwitcher locale={locale} />

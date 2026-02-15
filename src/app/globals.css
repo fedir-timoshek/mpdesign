@@ -634,6 +634,10 @@ ul {
   transform: translateY(-1px);
 }
 
+.gallery-nav-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .gallery-counter {
   margin: 0;
   padding: 0.25rem 0.55rem;
@@ -695,6 +699,10 @@ ul {
   transform: translateY(-2px);
 }
 
+.thumb-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .thumb-button:focus-visible,
 .gallery-nav-button:focus-visible,
 .palette-chip:focus-visible,
@@ -748,6 +756,10 @@ ul {
 
 .palette-chip:hover {
   transform: translateY(-1px);
+}
+
+.palette-chip:active {
+  transform: translateY(0) scale(0.99);
 }
 
 .palette-chip.is-active {
@@ -877,6 +889,20 @@ ul {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-hero-media img,
+  .product-main-image img {
+    animation: none;
+    transition: none;
+  }
+
+  .thumb-button,
+  .palette-chip,
+  .gallery-nav-button {
+    transition: none;
   }
 }
 

@@ -6,6 +6,10 @@ export const dynamic = "force-static";
 
 const baseUrl = getPublicSiteUrl();
 
+function withTrailingSlash(url: string) {
+  return url.endsWith("/") ? url : `${url}/`;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await getSiteContent();
   const hasShutters = content.categories.some((category) => category.slug === "shutters");
@@ -28,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of content.locales) {
     for (const route of staticRoutes) {
       entries.push({
-        url: `${baseUrl}/${locale}${route}`,
+        url: withTrailingSlash(`${baseUrl}/${locale}${route}`),
         lastModified: content.updatedAt,
         changeFrequency: "weekly",
         priority: route === "" ? 1 : 0.8,
@@ -37,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const product of content.products) {
       entries.push({
-        url: `${baseUrl}/${locale}/products/${product.slug}`,
+        url: withTrailingSlash(`${baseUrl}/${locale}/products/${product.slug}`),
         lastModified: content.updatedAt,
         changeFrequency: "weekly",
         priority: 0.7,

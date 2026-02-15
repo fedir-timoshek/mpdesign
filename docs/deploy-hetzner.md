@@ -37,11 +37,16 @@ Notes:
 curl -I https://<staging-domain>/fr/
 ```
 
-Expected headers include:
-- `Content-Security-Policy`
+If headers are missing:
+- Hetzner Webhosting may ignore `Header` directives in `.htaccess` (hosting-level limitation).
+- In that case move headers to Cloudflare (Transform Rules / Response Header Modification) and treat `.htaccess` as best-effort.
+
+Recommended baseline headers (via Cloudflare if needed):
+- `Content-Security-Policy` (or start with Report-Only)
 - `X-Content-Type-Options`
 - `Referrer-Policy`
 - `Permissions-Policy`
+- `Strict-Transport-Security` (only when HTTPS is guaranteed end-to-end)
 
 ## Post-Deploy Smoke Protocol
 

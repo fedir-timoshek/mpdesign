@@ -52,6 +52,7 @@ jobs:
           NEXT_PUBLIC_LEAD_ENDPOINT: ${{ secrets.NEXT_PUBLIC_LEAD_ENDPOINT }}
           NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN: ${{ secrets.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN }}
           CONTENT_API_URL: ${{ secrets.CONTENT_API_URL }}
+          SITE_DEPLOY_ENV: ${{ startsWith(github.ref, 'refs/tags/v') && 'production' || 'staging' }}
         run: npm run build
 
       - name: Upload build artifact

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { LeadSection } from "@/components/lead-section";
 import { ProductCard } from "@/components/product-card";
 import { getCategoryByMaterial, getSeoForPage, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/routing";
-import { buildLocaleAlternates, resolveLocale } from "@/lib/seo";
+import { buildLocaleAlternates, buildSocialMetadata, resolveLocale } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string; material: string }>;
@@ -30,6 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     category?.title[safeLocale],
     category?.description[safeLocale],
   );
+  const social = buildSocialMetadata(
+    safeLocale,
+    seo.title,
+    seo.description,
+    category?.heroImage.src,
+  );
 
   return {
     title: seo.title,
@@ -38,6 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       safeLocale,
       (itemLocale) => `/${itemLocale}/windows/${material}`,
     ),
+    ...social,
   };
 }
 
@@ -93,6 +101,8 @@ export default async function MaterialCategoryPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      <LeadSection locale={locale} sourcePage={`/${locale}/windows/${material}`} />
     </>
   );
 }

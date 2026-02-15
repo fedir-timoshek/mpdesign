@@ -5,8 +5,8 @@ Synchronize catalog data from supplier pages, localize media assets, and validat
 
 ## Preconditions
 
-- Node 24 LTS active.
-- Dependencies installed with `npm ci`.
+- Node pinned via `.nvmrc` (`24.13.1`).
+- Dependencies installed with `npm ci` (or use `./scripts/npm.sh ci` if Node is not installed globally).
 - Local draft source is present in `../черновик:макет`.
 
 Reachability check:
@@ -19,6 +19,8 @@ curl -I --max-time 20 https://www.witraz.eu/fr/produits/fenetres-pvc
 
 ```bash
 npm run content:sync:witraz
+npm run content:enrich:supplier
+npm run content:normalize
 npm run content:enrich:experience
 npm run content:localize:images
 npm run content:audit
@@ -41,17 +43,24 @@ npm run release:check
 - Downloads supplier images into `public/assets/supplier`.
 - Rewrites media URLs in `src/data/content.local.json` to local paths.
 
-4. `content:audit`
+4. `content:enrich:supplier`
+- Backfills missing specs/features via a supplier proxy (no runtime dependency).
+- Keeps FR/DE strictly present for all fields.
+
+5. `content:normalize`
+- Normalizes brand spelling inside FR/DE copy (e.g. `Witraż` -> `Witraz`) so content stays clean and avoids locale-noise.
+
+6. `content:audit`
 - Fails if FR/DE fields are missing or media still points to remote URLs.
 
-5. `test:e2e:ux`
+7. `test:e2e:ux`
 - Runs dedicated UX quality scenarios for product interactions (keyboard gallery control, mobile swipe, sticky CTA behavior).
 
-6. `content:audit:strict`
+8. `content:audit:strict`
 - Production-readiness gate.
 - In addition to base integrity checks, fails on placeholder-like specs/text and weak palette coverage.
 
-7. `release:check`
+9. `release:check`
 - Runs content audits, lint, typecheck, unit tests, e2e tests, and build.
 
 ## If Supplier Is Unreachable
@@ -61,17 +70,33 @@ Symptoms:
 - `content:sync:witraz` cannot complete
 
 Action:
-1. Use fallback flow from local draft:
+1. If you only need to ship with the last known catalog (no new products), skip sync and run:
+
+```bash
+npm run content:enrich:supplier
+npm run content:normalize
+npm run content:enrich:experience
+npm run content:localize:images
+npm run content:audit:strict
+npm run release:check
+```
+
+2. If you need to import newly published supplier products, run `content:sync:witraz` from a network that can reach `www.witraz.eu` (or via VPN), then continue with the standard flow.
+
+3. Alternative fallback flow from local draft (minimal catalog, no supplier crawl):
 
 ```bash
 npm run content:generate
+npm run content:enrich:supplier
+npm run content:normalize
 npm run content:enrich:experience
 npm run content:localize:images
 npm run content:audit:strict
 ```
 
-2. `content:localize:images` now supports proxy fallback (`wsrv.nl`) and can still localize image binaries even when direct supplier access is blocked.
-3. Run full `release:check` before deploy.
+4. Notes:
+- `content:localize:images` supports proxy fallback (`wsrv.nl`) and can still localize images even when direct supplier access is blocked.
+- `content:enrich:supplier` uses a proxy read layer (`r.jina.ai`) and can still backfill specs when the supplier origin is slow/unreachable.
 
 ## Go-Live Order
 

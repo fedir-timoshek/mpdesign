@@ -9,7 +9,7 @@ import {
   getSiteContent,
 } from "@/lib/content";
 import { isLocale } from "@/lib/routing";
-import { buildLocaleAlternates, resolveLocale } from "@/lib/seo";
+import { buildLocaleAlternates, buildSocialMetadata, resolveLocale } from "@/lib/seo";
 import {
   localizedCategoryInfo,
   localizedLandingBlocks,
@@ -24,17 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const safeLocale = resolveLocale(locale);
   const seo = getSeoForPage(safeLocale);
+  const social = buildSocialMetadata(safeLocale, seo.title, seo.description);
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: buildLocaleAlternates(safeLocale, (itemLocale) => `/${itemLocale}`),
-    openGraph: {
-      title: seo.title,
-      description: seo.description,
-      type: "website",
-      locale: safeLocale === "fr" ? "fr_CH" : "de_CH",
-    },
+    ...social,
   };
 }
 

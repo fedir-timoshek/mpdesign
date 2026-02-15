@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=24 <25",
-    "npm": ">=11 <12"
+    "node": "24.13.1",
+    "npm": "11.8.0"
   },
   "scripts": {
     "dev": "next dev",
@@ -23,7 +23,9 @@
     "content:generate": "node scripts/generate-local-content.mjs",
     "content:sync:witraz": "node scripts/sync-witraz-content.mjs",
     "content:localize:images": "node scripts/localize-supplier-images.mjs",
+    "content:enrich:supplier": "node scripts/enrich-supplier-content.mjs",
     "content:enrich:experience": "node scripts/enrich-product-experience.mjs",
+    "content:normalize": "node scripts/normalize-content-text.mjs",
     "content:audit": "node scripts/audit-content-integrity.mjs",
     "content:audit:strict": "node scripts/audit-content-integrity.mjs --strict-placeholders --strict-palette"
   },

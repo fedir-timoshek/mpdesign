@@ -5,7 +5,7 @@ Production-oriented showcase website for windows and doors, built with Next.js A
 ## Key Features
 
 - Bilingual routes: `/{locale}` where locale is `fr` or `de`
-- Product catalog with typed FR/DE content (currently 47 product detail pages)
+- Product catalog with typed FR/DE content (currently 133 product detail pages)
 - Data-driven architecture (single content bundle)
 - Lead form contract prepared for Google Apps Script + Google Sheets + Telegram
 - SEO baseline: sitemap, robots, canonical, hreflang
@@ -29,6 +29,14 @@ npm ci
 
 If Node is not installed, install Node.js 24 LTS first.
 
+Alternative (no global Node install required):
+
+```bash
+./scripts/npm.sh ci
+```
+
+This downloads the pinned Node.js version from `.nvmrc` into `.tools/` and runs `npm` from there.
+
 ## Scripts
 
 ```bash
@@ -41,6 +49,8 @@ npm run test:e2e:ux
 npm run build
 npm run release:check
 npm run content:sync:witraz
+npm run content:enrich:supplier
+npm run content:normalize
 npm run content:enrich:experience
 npm run content:localize:images
 npm run content:audit
@@ -84,12 +94,16 @@ Audit output: `docs/witraz-catalog-audit-latest.md`
 Then enrich UX data and localize supplier images:
 
 ```bash
+npm run content:enrich:supplier
+npm run content:normalize
 npm run content:enrich:experience
 npm run content:localize:images
 npm run content:audit
 ```
 
 - `content:enrich:experience`: ensures every product has a usable color palette block.
+- `content:enrich:supplier`: backfills missing specs/features using a supplier proxy (no runtime dependency).
+- `content:normalize`: normalizes brand spelling (e.g. `Witraż` -> `Witraz`) to keep FR/DE copy clean.
 - `content:localize:images`: downloads supplier media and rewrites product/category media URLs to local files in `public/assets/supplier` (with automatic proxy fallback if direct supplier access is blocked).
 - `content:audit`: strict integrity check (FR/DE presence, specs, palettes, local media URLs).
 - `content:audit:strict`: production-readiness check (fails on placeholder specs/text and insufficient palette coverage).

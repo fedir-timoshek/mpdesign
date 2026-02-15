@@ -1,5 +1,11 @@
 type CtaChannel = "whatsapp" | "call" | "form";
-type CtaPlacement = "mobile_sticky" | "lead_form" | "product_palette";
+type CtaPlacement =
+  | "mobile_sticky"
+  | "lead_form"
+  | "product_palette"
+  | "header_quote"
+  | "header_contact"
+  | "product_hero";
 
 type CtaPayload = {
   channel: CtaChannel;

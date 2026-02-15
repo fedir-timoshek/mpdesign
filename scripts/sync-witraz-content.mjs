@@ -736,13 +736,24 @@ function extractProductDocuments(html) {
   return docs.slice(0, 12);
 }
 
+function extractLeftBlock(html) {
+  return (
+    (html.match(
+      /<div class="specification[^"]*">[\s\S]*?<div class="left">([\s\S]*?)<\/div>\s*<div class="center-block">/i,
+    ) || [])[1] ||
+    (html.match(/<div class="left">([\s\S]*?)<\/div>/i) || [])[1] ||
+    ""
+  );
+}
+
 function extractSpecs(html) {
-  const rightBlock =
-    (html.match(/<div class="right">([\s\S]*?)<\/div>\s*<div class="arrow"/i) || [])[1] || "";
+  const rightBlock = (html.match(/<div class="right">([\s\S]*?)<\/div>/i) || [])[1] || "";
 
   const specs = [];
 
-  for (const match of rightBlock.matchAll(/<div class="item">([\s\S]*?)<\/div>\s*<\/div>/gi)) {
+  for (const match of rightBlock.matchAll(
+    /<div class="item">([\s\S]*?)<\/div>\s*<\/div>/gi,
+  )) {
     const block = match[1] || "";
     const label = cleanText(
       (block.match(/<div class="item-description">([\s\S]*?)<\/div>/i) || [])[1] || "",
@@ -762,20 +773,65 @@ function extractSpecs(html) {
     });
   }
 
+  if (specs.length === 0) {
+    for (const match of rightBlock.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)) {
+      const text = cleanText(match[1]);
+      if (!text) {
+        continue;
+      }
+
+      const parts = text.split(":");
+      if (parts.length < 2) {
+        specs.push({ label: "Specification", value: text });
+        continue;
+      }
+
+      const label = parts.shift()?.trim() || "Specification";
+      const value = parts.join(":").trim() || text;
+      specs.push({ label, value });
+    }
+  }
+
   return specs.slice(0, 10);
 }
 
 function extractFeatures(html) {
-  const leftBlock =
-    (html.match(
-      /<div class="specification[^"]*">[\s\S]*?<div class="left">([\s\S]*?)<\/div>\s*<div class="center-block">/i,
-    ) || [])[1] || "";
+  const leftBlock = extractLeftBlock(html);
 
   const features = [];
   for (const match of leftBlock.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)) {
     const value = cleanText(match[1]);
     if (value && isUsableParagraph(value)) {
       features.push(value);
+    }
+  }
+
+  if (features.length === 0) {
+    for (const match of html.matchAll(/<div class="point-info">([\s\S]*?)<\/div>/gi)) {
+      const block = match[1] || "";
+      const title = cleanText(
+        (block.match(/<div[^>]*class=['"]title['"][^>]*>([\s\S]*?)<\/div>/i) || [])[1] || "",
+      );
+      const body = cleanText(
+        block.replace(/<div[^>]*class=['"]title['"][^>]*>[\s\S]*?<\/div>/i, " "),
+      );
+
+      const combined = [title, body].filter(Boolean).join(": ").trim();
+      if (combined && isUsableParagraph(combined)) {
+        features.push(combined);
+      }
+    }
+  }
+
+  if (features.length === 0) {
+    const paragraphs = Array.from(leftBlock.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi))
+      .map((match) => cleanText(match[1]))
+      .filter((paragraph) => isUsableParagraph(paragraph));
+
+    for (const paragraph of paragraphs.slice(0, 8)) {
+      if (paragraph) {
+        features.push(paragraph);
+      }
     }
   }
 
@@ -819,12 +875,9 @@ function extractProductData(html, url) {
     (html.match(/<div class="lead">[\s\S]*?<h1[^>]*>([\s\S]*?)<\/h1>/i) || [])[1] || "",
   );
 
-  const leftBlock =
-    (html.match(
-      /<div class="specification[^"]*">[\s\S]*?<div class="left">([\s\S]*?)<\/div>\s*<div class="center-block">/i,
-    ) || [])[1] || "";
+  const leftBlock = extractLeftBlock(html);
 
-  const paragraphs = Array.from(leftBlock.matchAll(/<p>([\s\S]*?)<\/p>/gi))
+  const paragraphs = Array.from(leftBlock.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi))
     .map((match) => cleanText(match[1]))
     .filter((paragraph) => isUsableParagraph(paragraph));
 

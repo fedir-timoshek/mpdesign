@@ -16,6 +16,10 @@ const retryBackoffMs = 500;
 const userAgent = "Mozilla/5.0 (Codex Image Localizer)";
 const probeUrl = `${supplierHost}/fr/produits/fenetres-pvc`;
 
+function sha1Short(value) {
+  return crypto.createHash("sha1").update(value).digest("hex").slice(0, 10);
+}
+
 function isSupplierUrl(value) {
   if (!value) {
     return false;
@@ -67,7 +71,7 @@ function buildLocalFilename(url, contentType) {
   const sourceExt = path.extname(base).toLowerCase();
   const stemRaw = sourceExt ? base.slice(0, -sourceExt.length) : base;
   const stem = sanitizeSegment(stemRaw || "image");
-  const hash = crypto.createHash("sha1").update(url).digest("hex").slice(0, 10);
+  const hash = sha1Short(url);
 
   let extension = sourceExt;
   if (!extension || extension.length > 6) {
@@ -75,6 +79,25 @@ function buildLocalFilename(url, contentType) {
   }
 
   return `${stem || "image"}-${hash}${extension}`;
+}
+
+function buildExistingFileIndex() {
+  const index = new Map();
+
+  if (!fs.existsSync(outputDir)) {
+    return index;
+  }
+
+  for (const entry of fs.readdirSync(outputDir)) {
+    const match = entry.match(/-([0-9a-f]{10})\.[a-z0-9]+$/i);
+    if (!match) {
+      continue;
+    }
+
+    index.set(match[1], entry);
+  }
+
+  return index;
 }
 
 async function fetchBinary(url) {
@@ -191,6 +214,7 @@ function writeReport({
   failed,
   usedProxyCount,
   supplierReachable,
+  cacheHitCount,
 }) {
   const lines = [];
   lines.push("# Witraz Image Localization Report");
@@ -199,6 +223,7 @@ function writeReport({
   lines.push(`Supplier direct reachable: ${supplierReachable ? "yes" : "no"}`);
   lines.push(`Downloaded via proxy: ${usedProxyCount}`);
   lines.push(`Downloaded files: ${downloadedCount}`);
+  lines.push(`Cache hits: ${cacheHitCount}`);
   lines.push(`Localized image references: ${localizedCount}`);
   lines.push(`Skipped (already local or cached): ${skippedCount}`);
   lines.push(`Failed downloads: ${failed.length}`);
@@ -221,6 +246,7 @@ function writeReport({
 async function main() {
   const supplierReachable = await canReachSupplier();
   fs.mkdirSync(outputDir, { recursive: true });
+  const existingIndex = buildExistingFileIndex();
 
   const content = JSON.parse(fs.readFileSync(contentFile, "utf8"));
   const targetsByUrl = collectImageTargets(content);
@@ -230,36 +256,45 @@ async function main() {
   let downloadedCount = 0;
   let localizedCount = 0;
   let usedProxyCount = 0;
+  let cacheHitCount = 0;
 
   for (const [remoteUrl, objects] of targetsByUrl.entries()) {
     if (!urlToLocalPath.has(remoteUrl)) {
-      let fetched = null;
-      if (supplierReachable) {
-        fetched = await fetchBinary(remoteUrl);
-      }
-
-      if (!fetched) {
-        fetched = await fetchBinary(buildProxyUrl(remoteUrl));
-        if (fetched) {
-          usedProxyCount += 1;
+      const hash = sha1Short(remoteUrl);
+      const cachedFilename = existingIndex.get(hash);
+      if (cachedFilename) {
+        urlToLocalPath.set(remoteUrl, `/assets/supplier/${cachedFilename}`);
+        cacheHitCount += 1;
+      } else {
+        let fetched = null;
+        if (supplierReachable) {
+          fetched = await fetchBinary(remoteUrl);
         }
+
+        if (!fetched) {
+          fetched = await fetchBinary(buildProxyUrl(remoteUrl));
+          if (fetched) {
+            usedProxyCount += 1;
+          }
+        }
+
+        if (!fetched) {
+          failed.push(remoteUrl);
+          continue;
+        }
+
+        const filename = buildLocalFilename(remoteUrl, fetched.contentType);
+        existingIndex.set(hash, filename);
+        const targetPath = path.resolve(outputDir, filename);
+        const publicPath = `/assets/supplier/${filename}`;
+
+        if (!fs.existsSync(targetPath)) {
+          fs.writeFileSync(targetPath, fetched.buffer);
+          downloadedCount += 1;
+        }
+
+        urlToLocalPath.set(remoteUrl, publicPath);
       }
-
-      if (!fetched) {
-        failed.push(remoteUrl);
-        continue;
-      }
-
-      const filename = buildLocalFilename(remoteUrl, fetched.contentType);
-      const targetPath = path.resolve(outputDir, filename);
-      const publicPath = `/assets/supplier/${filename}`;
-
-      if (!fs.existsSync(targetPath)) {
-        fs.writeFileSync(targetPath, fetched.buffer);
-        downloadedCount += 1;
-      }
-
-      urlToLocalPath.set(remoteUrl, publicPath);
     }
 
     const localPath = urlToLocalPath.get(remoteUrl);
@@ -285,12 +320,14 @@ async function main() {
     failed,
     usedProxyCount,
     supplierReachable,
+    cacheHitCount,
   });
 
   console.warn(`Supplier image URLs found: ${targetsByUrl.size}`);
   console.warn(`Supplier direct reachable: ${supplierReachable ? "yes" : "no"}`);
   console.warn(`Downloaded via proxy: ${usedProxyCount}`);
   console.warn(`Downloaded images: ${downloadedCount}`);
+  console.warn(`Cache hits: ${cacheHitCount}`);
   console.warn(`Localized image references: ${localizedCount}`);
   console.warn(`Failed downloads: ${failed.length}`);
   console.warn(`Report: ${path.relative(projectRoot, reportFile)}`);

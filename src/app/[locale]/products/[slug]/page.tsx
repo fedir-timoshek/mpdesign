@@ -5,7 +5,7 @@ import { LeadForm } from "@/components/lead-form";
 import { ProductExperience } from "@/components/product-experience";
 import { getCategoryPath, getSeoForPage, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/routing";
-import { buildLocaleAlternates, resolveLocale } from "@/lib/seo";
+import { buildLocaleAlternates, buildSocialMetadata, resolveLocale } from "@/lib/seo";
 import { localizedCategoryInfo } from "@/lib/site-config";
 
 type Props = {
@@ -29,6 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     product?.title[safeLocale],
     product?.summary[safeLocale],
   );
+  const social = buildSocialMetadata(
+    safeLocale,
+    seo.title,
+    seo.description,
+    product?.heroImage.src,
+  );
 
   return {
     title: seo.title,
@@ -37,10 +43,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       safeLocale,
       (itemLocale) => `/${itemLocale}/products/${slug}`,
     ),
+    ...social,
     openGraph: {
-      title: seo.title,
-      description: seo.description,
-      images: product ? [{ url: product.heroImage.src }] : undefined,
+      ...social.openGraph,
+      images: product
+        ? [
+            {
+              url: product.heroImage.src,
+              alt: product.heroImage.alt[safeLocale],
+            },
+          ]
+        : social.openGraph.images,
     },
   };
 }
@@ -80,7 +93,13 @@ export default async function ProductPage({ params }: Props) {
             <p className="product-subtitle">{product.subtitle[locale]}</p>
             <p>{product.summary[locale]}</p>
             <div className="product-actions">
-              <a href="#lead-form" className="btn btn-primary">
+              <a
+                href="#lead-form"
+                className="btn btn-primary"
+                data-mpdesign-cta="1"
+                data-mpdesign-cta-channel="form"
+                data-mpdesign-cta-placement="product_hero"
+              >
                 {product.ctaLabel[locale]}
               </a>
               <Link href={categoryPath} className="btn btn-ghost">

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { LeadSection } from "@/components/lead-section";
 import { ProductCard } from "@/components/product-card";
 import { getSeoForPage, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/routing";
-import { buildLocaleAlternates, resolveLocale } from "@/lib/seo";
+import { buildLocaleAlternates, buildSocialMetadata, resolveLocale } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -23,11 +24,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     category?.title[safeLocale],
     category?.description[safeLocale],
   );
+  const social = buildSocialMetadata(
+    safeLocale,
+    seo.title,
+    seo.description,
+    category?.heroImage.src,
+  );
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: buildLocaleAlternates(safeLocale, (itemLocale) => `/${itemLocale}/doors`),
+    ...social,
   };
 }
 
@@ -69,6 +77,8 @@ export default async function DoorsPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      <LeadSection locale={locale} sourcePage={`/${locale}/doors`} />
     </>
   );
 }

@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { LeadSection } from "@/components/lead-section";
 import { getSeoForPage, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/routing";
-import { buildLocaleAlternates, resolveLocale } from "@/lib/seo";
+import { buildLocaleAlternates, buildSocialMetadata, resolveLocale } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const safeLocale = resolveLocale(locale);
   const seo = getSeoForPage(safeLocale);
+  const social = buildSocialMetadata(safeLocale, seo.title, seo.description);
   return {
     title: seo.title,
     description: seo.description,
@@ -24,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       safeLocale,
       (itemLocale) => `/${itemLocale}/windows`,
     ),
+    ...social,
   };
 }
 
@@ -40,37 +43,44 @@ export default async function WindowsIndexPage({ params }: Props) {
   );
 
   return (
-    <section className="section">
-      <div className="container section-head">
-        <p className="eyebrow">Windows</p>
-        <h1>{locale === "fr" ? "Toutes les fenetres" : "Alle Fenster"}</h1>
-      </div>
+    <>
+      <section className="section">
+        <div className="container section-head">
+          <p className="eyebrow">Windows</p>
+          <h1>{locale === "fr" ? "Toutes les fenetres" : "Alle Fenster"}</h1>
+        </div>
 
-      <div className="container category-grid">
-        {categories.map((category) => {
-          const href =
-            category.slug === "windows-pvc"
-              ? `/${locale}/windows/pvc`
-              : category.slug === "windows-wood"
-                ? `/${locale}/windows/wood`
-                : `/${locale}/windows/aluminum`;
+        <div className="container category-grid">
+          {categories.map((category) => {
+            const href =
+              category.slug === "windows-pvc"
+                ? `/${locale}/windows/pvc`
+                : category.slug === "windows-wood"
+                  ? `/${locale}/windows/wood`
+                  : `/${locale}/windows/aluminum`;
 
-          return (
-            <article key={category.slug} className="category-card">
-              <div className="category-media">
-                <img src={category.heroImage.src} alt={category.heroImage.alt[locale]} />
-              </div>
-              <div className="category-content">
-                <h2>{category.title[locale]}</h2>
-                <p>{category.description[locale]}</p>
-                <Link href={href} className="btn btn-ghost">
-                  {locale === "fr" ? "Voir la gamme" : "Zur Serie"}
-                </Link>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
+            return (
+              <article key={category.slug} className="category-card">
+                <div className="category-media">
+                  <img
+                    src={category.heroImage.src}
+                    alt={category.heroImage.alt[locale]}
+                  />
+                </div>
+                <div className="category-content">
+                  <h2>{category.title[locale]}</h2>
+                  <p>{category.description[locale]}</p>
+                  <Link href={href} className="btn btn-ghost">
+                    {locale === "fr" ? "Voir la gamme" : "Zur Serie"}
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <LeadSection locale={locale} sourcePage={`/${locale}/windows`} />
+    </>
   );
 }

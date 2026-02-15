@@ -202,7 +202,7 @@ export function ProductExperience({ locale, gallery, colorPalette, documents }: 
               ) : null}
             </>
           ) : (
-            <p className="palette-empty">{labels.docsEmpty}</p>
+            <p className="palette-empty">{labels.paletteEmpty}</p>
           )}
         </section>
 

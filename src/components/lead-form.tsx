@@ -8,7 +8,7 @@ import { Locale } from "@/types/content";
 type Props = {
   locale: Locale;
   sourcePage: string;
-  productSlug?: string;
+  productSlug?: string | undefined;
 };
 
 type FormState = {

@@ -1,15 +1,15 @@
 # Witraz Catalog Audit (Auto-generated)
 
-Generated: 2026-02-14T13:15:44.811Z
-Local catalog products: 47
-Source links FR: 43
-Source links DE: 38
+Generated: 2026-02-15T17:21:20.963Z
+Local catalog products: 133
+Source links FR: 57
+Source links DE: 47
 Source links PL: 52
-Updated products: 0
 Created products: 0
-Ignored supplier rows: 9
-Missing FR source pages for local products: 5
-Missing DE source pages for local products: 9
+Updated products: 132
+Ignored supplier rows: 24
+Missing FR source pages for local products: 91
+Missing DE source pages for local products: 95
 
 ## Created
 
@@ -17,83 +17,359 @@ Missing DE source pages for local products: 9
 
 ## Updated
 
-- none
+- pn70-balance-241: features, specs, gallery
+- pn70-balance-55: features, specs, gallery
+- kommerling-88: features, specs, gallery
+- kommerling-88-647: features, specs, gallery
+- pk76-innovo-312: features, specs, gallery
+- pk76-innovo-240: features, specs, gallery
+- pk76-innovo-53: features, specs, gallery
+- pk76-innovo: features, specs, gallery
+- pk76-innovo-239: features, specs, gallery
+- pk76-innovo-52: features, specs, gallery
+- pk76-innovo-ac: features, specs, gallery
+- pk76-innovo-ac-597: features, specs, gallery
+- pk76-innovo-ac-595: features, specs, gallery
+- pk76-renovo-60: features, specs, gallery
+- pk76-renovo-60-245: features, specs, gallery
+- pk76-renovo-60-80: features, specs, gallery
+- pn70-balance: features, specs, gallery
+- veranda-skb-249: features, specs, gallery
+- premislide-76: features, specs, gallery
+- premislide-76-607: features, specs, gallery
+- v70-perfectline-257: features, specs, gallery
+- v70-perfectline-7: features, specs, gallery
+- v70-perfectline: features, specs, gallery
+- v70-renovo-35: features, specs, gallery
+- v70-renovo-35-244: features, specs, gallery
+- v70-renovo-35-79: features, specs, gallery
+- v82-powertherm: features, specs, gallery
+- v82-powertherm-258: features, specs, gallery
+- v82-powertherm-9: features, specs, gallery
+- v82-powertherm-ac: features, specs, gallery
+- v82-powertherm-ac-606: features, specs, gallery
+- v82-powertherm-ac-599: features, specs, gallery
+- v82-renovo-35: features, specs, gallery
+- v82-renovo-35-242: features, specs, gallery
+- v82-renovo-35-13: features, specs, gallery
+- vekamotion-82: features, specs, gallery
+- vekamotion-82-641: features, specs, gallery
+- vekamotion-82-638: features, specs, gallery
+- vekamotion-82-max: features, specs, gallery
+- vekamotion-82-max-608: features, specs, gallery
+- vekamove-76: features, specs, gallery
+- vekamove-76-643: features, specs, gallery
+- veranda-skb: features, specs, gallery
+- veranda-skb-16: features, specs, gallery
+- witraz-hs76-54: features, specs, gallery
+- witraz-hs76: features, specs, gallery
+- witraz-hs76-252: features, specs, gallery
+- ipa-276: specs, gallery
+- ipa-25: specs, gallery
+- casement-274: features, specs, gallery
+- casement-23: features, specs, gallery
+- casement: features, specs, gallery
+- sash-24: features, specs, gallery
+- sash-275: features, specs, gallery
+- ecoline: features, specs, gallery
+- ecoline-263: features, specs, gallery
+- ecoline-26: features, specs, gallery
+- ecotherm: features, specs, gallery
+- ecotherm-265: features, specs, gallery
+- ecotherm-28: features, specs, gallery
+- duo-modern-269: features, specs, gallery
+- duo-regular-268: features, specs, gallery
+- duo-modern-31: features, specs, gallery
+- duo-quadro: features, specs, gallery
+- duo-regular-30: features, specs, gallery
+- duo-modern: features, specs, gallery
+- duo-regular: features, specs, gallery
+- okno-obrotowe: features, specs, gallery
+- hs-slide-19: features, specs, gallery
+- hs-slide: features, specs, gallery
+- htr: features, specs, gallery
+- htr-623: specs, gallery
+- ipa: specs, gallery
+- pivot-277: features, specs, gallery
+- pivot: features, specs, gallery
+- witraz-skb-278: features, specs, gallery
+- renovation-272: features, specs, gallery
+- renovation-20: features, specs, gallery
+- renovation: features, specs, gallery
+- retro: features, specs, gallery
+- retro-266: features, specs, gallery
+- retro-37: features, specs, gallery
+- sash: features, specs, gallery
+- thermoline: features, specs, gallery
+- thermoline-264: features, specs, gallery
+- thermoline-27: features, specs, gallery
+- hs-slide-279: features, specs, gallery
+- witraz-skb-18: features, specs, gallery
+- witraz-skb: features, specs, gallery
+- pe50: specs, gallery
+- pe68: features, specs, gallery
+- pe68-282: features, specs, gallery
+- pe68-40: features, specs, gallery
+- pe78ei-42: features, specs, gallery
+- pe78ei: features, specs, gallery
+- pe78n: specs, gallery
+- pe78n-283: specs, gallery
+- pe78n-41: specs, gallery
+- pe78ei-284: features, specs, gallery
+- pe50-280: specs, gallery
+- pe50-38: specs, gallery
+- sl1600: specs, gallery
+- sl1600-285: specs, gallery
+- sl1600-43: features, specs, gallery
+- shutter-rak-e: features, specs, gallery
+- shutter-rar: features, specs, gallery
+- shutter-ras: features, specs, gallery
+- shutter-rnk-e: features, specs, gallery
+- shutter-rnk-xt: features, specs, gallery
+- shutter-rnk-b: features, specs, gallery
+- shutter-rnk-t: features, specs, gallery
+- shutter-rns: features, specs, gallery
+- door-wood-vintage-627: specs, gallery
+- door-wood-artistic: specs, gallery
+- door-pvc-classic: gallery
+- door-wood-classic: specs, gallery
+- door-pvc-classic-67: specs, gallery
+- door-wood-classique: specs, gallery
+- door-pvc-classic-297: gallery
+- door-wood-classique-626: specs, gallery
+- door-wood-elegance: specs, gallery
+- door-wood-elegance-625: specs, gallery
+- door-wood-modern: specs, gallery
+- door-pvc-modern: gallery
+- door-pvc-modern-298: gallery
+- door-wood-moderne: specs, gallery
+- door-pvc-modern-68: specs, gallery
+- door-wood-modern-624: specs, gallery
+- door-pvc-prestige-69: specs, gallery
+- door-pvc-prestige: gallery
+- door-pvc-prestige-299: gallery
+- door-wood-vintage: specs, gallery
 
 ## Missing Locale Sources
 
+- pn70-balance-241: FR source not found
+- pn70-balance-55: FR source not found
 - kommerling-88: FR source not found
+- kommerling-88-647: FR source not found
+- pk76-innovo-240: FR source not found
+- pk76-innovo-53: FR source not found
+- pk76-innovo-plus: FR source not found
+- pk76-innovo-239: FR source not found
+- pk76-innovo-52: FR source not found
+- pk76-innovo-ac-597: FR source not found
+- pk76-innovo-ac-595: FR source not found
+- pk76-renovo-60-245: FR source not found
+- pk76-renovo-60-80: FR source not found
+- veranda-skb-249: FR source not found
+- premislide-76-607: FR source not found
+- v70-perfectline-257: FR source not found
+- v70-perfectline-7: FR source not found
+- v70-renovo-35-244: FR source not found
+- v70-renovo-35-79: FR source not found
+- v82-powertherm-258: FR source not found
+- v82-powertherm-9: FR source not found
+- v82-powertherm-ac-606: FR source not found
+- v82-powertherm-ac-599: FR source not found
+- v82-renovo-35-242: FR source not found
+- v82-renovo-35-13: FR source not found
+- vekamotion-82-641: FR source not found
+- vekamotion-82-638: FR source not found
+- vekamotion-82-max-608: FR source not found
+- vekamove-76-643: FR source not found
+- veranda-skb-16: FR source not found
+- witraz-hs76-54: FR source not found
+- witraz-hs76-252: FR source not found
+- ipa-276: FR source not found
+- ipa-25: FR source not found
+- casement-274: FR source not found
+- casement-23: FR source not found
+- sash-24: FR source not found
+- sash-275: FR source not found
+- ecoline-263: FR source not found
+- ecoline-26: FR source not found
+- ecotherm-265: FR source not found
+- ecotherm-28: FR source not found
+- duo-modern-269: FR source not found
+- duo-regular-268: FR source not found
+- duo-modern-31: FR source not found
 - duo-quadro: FR source not found
+- duo-regular-30: FR source not found
+- okno-obrotowe: FR source not found
+- hs-slide-19: FR source not found
+- htr-623: FR source not found
+- pivot-277: FR source not found
+- witraz-skb-278: FR source not found
+- renovation-272: FR source not found
+- renovation-20: FR source not found
+- retro-266: FR source not found
+- retro-37: FR source not found
+- thermoline-264: FR source not found
+- thermoline-27: FR source not found
+- hs-slide-279: FR source not found
+- witraz-skb-18: FR source not found
+- pe68-282: FR source not found
+- pe68-40: FR source not found
+- pe78ei-42: FR source not found
+- pe78n-283: FR source not found
+- pe78n-41: FR source not found
+- pe78ei-284: FR source not found
+- pe50-280: FR source not found
+- pe50-38: FR source not found
+- sl1600-285: FR source not found
+- sl1600-43: FR source not found
+- shutter-rak-e: FR source not found
+- shutter-rar: FR source not found
+- shutter-ras: FR source not found
+- shutter-rnk-e: FR source not found
+- shutter-rnk-xt: FR source not found
+- shutter-rnk-b: FR source not found
+- shutter-rnk-t: FR source not found
+- shutter-rns: FR source not found
+- door-wood-vintage-627: FR source not found
 - door-wood-artistic: FR source not found
 - door-wood-classic: FR source not found
+- door-pvc-classic-67: FR source not found
+- door-pvc-classic-297: FR source not found
+- door-wood-classique-626: FR source not found
+- door-wood-elegance-625: FR source not found
+- door-pvc-modern-298: FR source not found
 - door-wood-moderne: FR source not found
-- vekamove-76: DE source not found
-- vekamotion-82-max: DE source not found
+- door-pvc-modern-68: FR source not found
+- door-wood-modern-624: FR source not found
+- door-pvc-prestige-69: FR source not found
+- door-pvc-prestige-299: FR source not found
+- pn70-balance-55: DE source not found
+- kommerling-88-647: DE source not found
+- pk76-innovo-312: DE source not found
+- pk76-innovo-53: DE source not found
+- pk76-innovo: DE source not found
+- pk76-innovo-plus: DE source not found
+- pk76-innovo-52: DE source not found
+- pk76-innovo-ac: DE source not found
+- pk76-innovo-ac-595: DE source not found
+- pk76-renovo-60: DE source not found
+- pk76-renovo-60-80: DE source not found
+- pn70-balance: DE source not found
 - premislide-76: DE source not found
-- door-wood-modern: DE source not found
-- door-wood-elegance: DE source not found
-- door-wood-classique: DE source not found
-- door-wood-vintage: DE source not found
-- htr: DE source not found
+- premislide-76-607: DE source not found
+- v70-perfectline-7: DE source not found
+- v70-perfectline: DE source not found
+- v70-renovo-35: DE source not found
+- v70-renovo-35-79: DE source not found
+- v82-powertherm: DE source not found
+- v82-powertherm-9: DE source not found
+- v82-powertherm-ac: DE source not found
+- v82-powertherm-ac-599: DE source not found
+- v82-renovo-35: DE source not found
+- v82-renovo-35-13: DE source not found
+- vekamotion-82: DE source not found
+- vekamotion-82-638: DE source not found
+- vekamotion-82-max: DE source not found
+- vekamotion-82-max-608: DE source not found
+- vekamove-76: DE source not found
+- vekamove-76-643: DE source not found
+- veranda-skb: DE source not found
+- veranda-skb-16: DE source not found
+- witraz-hs76-54: DE source not found
+- witraz-hs76: DE source not found
+- ipa-25: DE source not found
+- casement-23: DE source not found
+- casement: DE source not found
+- sash-24: DE source not found
+- ecoline: DE source not found
+- ecoline-26: DE source not found
+- ecotherm: DE source not found
+- ecotherm-28: DE source not found
+- duo-modern-31: DE source not found
 - duo-quadro: DE source not found
+- duo-regular-30: DE source not found
+- duo-modern: DE source not found
+- duo-regular: DE source not found
+- okno-obrotowe: DE source not found
+- hs-slide-19: DE source not found
+- hs-slide: DE source not found
+- htr: DE source not found
+- htr-623: DE source not found
+- ipa: DE source not found
+- pivot: DE source not found
+- renovation-20: DE source not found
+- renovation: DE source not found
+- retro: DE source not found
+- retro-37: DE source not found
+- sash: DE source not found
+- thermoline: DE source not found
+- thermoline-27: DE source not found
+- witraz-skb-18: DE source not found
+- witraz-skb: DE source not found
+- pe50: DE source not found
+- pe68: DE source not found
+- pe68-40: DE source not found
+- pe78ei-42: DE source not found
+- pe78ei: DE source not found
+- pe78n: DE source not found
+- pe78n-41: DE source not found
+- pe50-38: DE source not found
+- sl1600: DE source not found
+- sl1600-43: DE source not found
+- shutter-rak-e: DE source not found
+- shutter-rar: DE source not found
+- shutter-ras: DE source not found
+- shutter-rnk-e: DE source not found
+- shutter-rnk-xt: DE source not found
+- shutter-rnk-b: DE source not found
+- shutter-rnk-t: DE source not found
+- shutter-rns: DE source not found
+- door-wood-vintage-627: DE source not found
+- door-pvc-classic: DE source not found
+- door-pvc-classic-67: DE source not found
+- door-wood-classique: DE source not found
+- door-wood-classique-626: DE source not found
+- door-wood-elegance: DE source not found
+- door-wood-elegance-625: DE source not found
+- door-wood-modern: DE source not found
+- door-pvc-modern: DE source not found
+- door-pvc-modern-68: DE source not found
+- door-wood-modern-624: DE source not found
+- door-pvc-prestige-69: DE source not found
+- door-pvc-prestige: DE source not found
+- door-wood-vintage: DE source not found
 
 ## Ignored Supplier Rows
 
+- [fr] https://www.witraz.eu/fr/produits/fenetres-en-aluminium/fenetres-en-aluminium/pe-60,353 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-en-bois/fenetres-en-bois/fenetres-mixtes-bois-aluminium,339 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-en-bois/fenetres-mixtes-bois-aluminium/fenetre-mixtes-bois-aluminium-duo-integral,343 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-en-bois/fenetres-mixtes-bois-aluminium/fenetre-mixtes-bois-aluminium-duo-ronda,342 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-en-bois/fenetres-speciales/fenetre-a-battants,345 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-coulissantes/ecosol,322 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-coulissantes/hs70,320 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-coulissantes/witraz-hs82,323 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-coulissantes/witraz-slide-80,636 (no_product_window)
 - [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-koemmerling/kommerling-88,650 (no_product_window)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-adaptacyjne/rak-e,659 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-adaptacyjne/rar,660 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-adaptacyjne/ras,658 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-nadstawne/rnk-b,657 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-nadstawne/rnk-e,656 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-nadstawne/rnk-t,653 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-nadstawne/rnk-xt,655 (category_out_of_scope)
-- [pl] https://www.witraz.eu/produkty/rolety-zewnetrzne/rolety-nadstawne/rns,654 (category_out_of_scope)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-veka/v70-swingline,331 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/fenetres-pvc/fenetres-veka/v7o-softline,332 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/portes/bois/artistic,368 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/portes/bois/classic,366 (no_product_window)
+- [fr] https://www.witraz.eu/fr/produits/portes/bois/moderne,367 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/aluminium-fenster/aluminium-fenster/pe-60,281 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/holzfenster/holz-aluminium-fenster/okno-drewniano-aluminiowe-duo-integral,271 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/holzfenster/holz-aluminium-fenster/okno-drewniano-aluminiowe-duo-ronda,270 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/holzfenster/holzfenster/okna-drewniano-aluminiowe,267 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/holzfenster/sonderlosungen/kastenfenster,273 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/kunststofffenster/schiebefenster/ecosol,250 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/kunststofffenster/schiebefenster/hs70,248 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/kunststofffenster/schiebefenster/witraz-hs82,251 (no_product_window)
+- [de] https://www.witraz.eu/de/produkte/kunststofffenster/veka-fenster/v70-swingline,259 (no_product_window)
 
-## Coverage By Product
+## Catalog Counts
 
-- v82-powertherm: FR yes, DE yes, PL yes
-- v70-perfectline: FR yes, DE yes, PL yes
-- kommerling-88: FR no, DE yes, PL yes
-- pk76-innovo-plus: FR yes, DE yes, PL yes
-- pk76-innovo: FR yes, DE yes, PL yes
-- pn70-balance: FR yes, DE yes, PL yes
-- vekamove-76: FR yes, DE no, PL yes
-- vekamotion-82: FR yes, DE yes, PL yes
-- vekamotion-82-max: FR yes, DE no, PL yes
-- premislide-76: FR yes, DE no, PL yes
-- witraz-hs76: FR yes, DE yes, PL yes
-- veranda-skb: FR yes, DE yes, PL yes
-- v82-renovo-35: FR yes, DE yes, PL yes
-- v70-renovo-35: FR yes, DE yes, PL yes
-- pk76-renovo-60: FR yes, DE yes, PL yes
-- pk76-innovo-ac: FR yes, DE yes, PL yes
-- v82-powertherm-ac: FR yes, DE yes, PL yes
-- ecoline: FR yes, DE yes, PL yes
-- thermoline: FR yes, DE yes, PL yes
-- ecotherm: FR yes, DE yes, PL yes
-- retro: FR yes, DE yes, PL yes
-- duo-regular: FR yes, DE yes, PL yes
-- duo-modern: FR yes, DE yes, PL yes
-- renovation: FR yes, DE yes, PL yes
-- casement: FR yes, DE yes, PL yes
-- sash: FR yes, DE yes, PL yes
-- ipa: FR yes, DE yes, PL yes
-- pivot: FR yes, DE yes, PL yes
-- witraz-skb: FR yes, DE yes, PL yes
-- hs-slide: FR yes, DE yes, PL yes
-- pe50: FR yes, DE yes, PL yes
-- pe68: FR yes, DE yes, PL yes
-- pe78n: FR yes, DE yes, PL yes
-- pe78ei: FR yes, DE yes, PL yes
-- sl1600: FR yes, DE yes, PL yes
-- door-wood-modern: FR yes, DE no, PL yes
-- door-wood-elegance: FR yes, DE no, PL yes
-- door-wood-classique: FR yes, DE no, PL yes
-- door-wood-vintage: FR yes, DE no, PL yes
-- door-pvc-classic: FR yes, DE yes, PL yes
-- door-pvc-modern: FR yes, DE yes, PL yes
-- door-pvc-prestige: FR yes, DE yes, PL yes
-- htr: FR yes, DE no, PL yes
-- duo-quadro: FR no, DE no, PL yes
-- door-wood-artistic: FR no, DE yes, PL no
-- door-wood-classic: FR no, DE yes, PL no
-- door-wood-moderne: FR no, DE yes, PL no
+- windows-pvc: 48
+- windows-wood: 42
+- windows-aluminum: 15
+- shutters: 8
+- doors: 20
