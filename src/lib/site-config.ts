@@ -248,7 +248,7 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "impressum",
       title: "Mentions legales",
       intro:
-        "Informations legales relatives a l'editeur du site, au contact et a l'hebergement.",
+        "Informations legales relatives a l'editeur du site et au contact.",
       sections: [
         {
           heading: "Editeur du site",
@@ -257,10 +257,6 @@ export const legalPages: Record<Locale, LegalPage[]> = {
         {
           heading: "Contact",
           body: "Email: lior.solomonchuk@gmail.com. Telephone: +41 76 304 81 12.",
-        },
-        {
-          heading: "Hebergement",
-          body: "Hetzner Webhosting S (hebergement du site).",
         },
       ],
     },
@@ -318,7 +314,7 @@ export const legalPages: Record<Locale, LegalPage[]> = {
       slug: "impressum",
       title: "Impressum",
       intro:
-        "Rechtliche Informationen zum Anbieter, Kontakt und Hosting.",
+        "Rechtliche Informationen zum Anbieter und Kontakt.",
       sections: [
         {
           heading: "Anbieter",
@@ -327,10 +323,6 @@ export const legalPages: Record<Locale, LegalPage[]> = {
         {
           heading: "Kontakt",
           body: "E-Mail: lior.solomonchuk@gmail.com. Telefon: +41 76 304 81 12.",
-        },
-        {
-          heading: "Hosting",
-          body: "Hetzner Webhosting S (Hosting des Webauftritts).",
         },
       ],
     },

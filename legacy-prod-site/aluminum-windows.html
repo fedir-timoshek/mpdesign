@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenêtres en Aluminium - Witraz Suisse / Aluminiumfenster - Witraz Schweiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .products-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-color);
+            padding: 0.5rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .products-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-item-image {
+            background: var(--light-bg);
+            padding: 2rem;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-item-image img {
+            max-width: 90%;
+            max-height: 280px;
+            object-fit: contain;
+        }
+
+        .uw-badge-circle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6278 100%);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4);
+            z-index: 10;
+        }
+
+        .uw-value {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .uw-label {
+            font-size: 0.6rem;
+            margin-top: 2px;
+        }
+
+        .product-item-content {
+            padding: 1.5rem;
+        }
+
+        .product-item-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .product-item-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .product-item-content .btn-primary {
+            padding: 0.8rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+            margin: 3rem 0;
+        }
+
+        /* Hero aluminium */
+        .hero-aluminium {
+            background: linear-gradient(135deg, #4a4a4a 0%, #6b6b6b 50%, #555555 100%);
+        }
+
+        /* Sub nav aluminium */
+        .sub-nav-link.active,
+        .sub-nav-link:hover {
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+    </style>
+</head>
+<body data-current-lang="fr">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">MPDESIGN</a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul>
+                <li data-lang-fr><a href="index.html">Accueil</a></li>
+                <li data-lang-de><a href="index.html">Startseite</a></li>
+                <li data-lang-fr><a href="pvh-windows.html">Fenêtres PVC</a></li>
+                <li data-lang-de><a href="pvh-windows.html">Kunststofffenster</a></li>
+                <li data-lang-fr><a href="wooden-windows.html">Fenêtres en bois</a></li>
+                <li data-lang-de><a href="wooden-windows.html">Holzfenster</a></li>
+                <li data-lang-fr><a href="aluminum-windows.html">Fenêtres aluminium</a></li>
+                <li data-lang-de><a href="aluminum-windows.html">Aluminiumfenster</a></li>
+                <li data-lang-fr><a href="doors.html">Portes</a></li>
+                <li data-lang-de><a href="doors.html">Türen</a></li>
+                <li data-lang-fr><a href="index.html#contact">Contact</a></li>
+                <li data-lang-de><a href="index.html#contact">Kontakt</a></li>
+                <li class="language-switcher">
+                    <button class="lang-btn active" data-lang="fr">
+                        <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#ED2939" width="900" height="600"/>
+                            <rect fill="#fff" width="600" height="600"/>
+                            <rect fill="#002395" width="300" height="600"/>
+                        </svg>
+                        <span>FR</span>
+                    </button>
+                    <button class="lang-btn" data-lang="de">
+                        <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#000" width="900" height="200"/>
+                            <rect fill="#D00" y="200" width="900" height="200"/>
+                            <rect fill="#FFCE00" y="400" width="900" height="200"/>
+                        </svg>
+                        <span>DE</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="breadcrumb">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <a href="index.html"><span data-lang-fr class="inline">Accueil</span><span data-lang-de class="inline">Startseite</span></a>
+            <span>→</span>
+            <span><span data-lang-fr class="inline">Fenêtres en Aluminium</span><span data-lang-de class="inline">Aluminiumfenster</span></span>
+        </div>
+    </section>
+
+    <section class="hero hero-aluminium" style="height: 50vh;">
+        <div class="hero-content">
+            <h1><span data-lang-fr class="inline">Fenêtres en Aluminium</span><span data-lang-de class="inline">Aluminiumfenster</span></h1>
+            <p><span data-lang-fr class="inline">Des fenêtres en aluminium bien conçues — des décennies d'utilisation sans souci</span><span data-lang-de class="inline">Gut durchdachte Aluminiumfenster — jahrzehntelange sorgenfreie Nutzung</span></p>
+        </div>
+    </section>
+
+    <!-- Sub Navigation -->
+    <section style="background: var(--light-bg); padding: 0; position: sticky; top: 80px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow-x: hidden;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <nav class="sub-nav" style="overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; justify-content: center;">
+                <a href="#aluminium" class="sub-nav-link"><span data-lang-fr class="inline">FENÊTRES ALUMINIUM</span><span data-lang-de class="inline">ALUMINIUMFENSTER</span></a>
+                <a href="#sliding-alu" class="sub-nav-link"><span data-lang-fr class="inline">FENÊTRES COULISSANTES</span><span data-lang-de class="inline">SCHIEBEFENSTER</span></a>
+            </nav>
+            <style>.sub-nav::-webkit-scrollbar { display: none; }</style>
+        </div>
+    </section>
+
+    <!-- ALUMINIUM WINDOWS -->
+    <section id="aluminium" class="products-section" style="scroll-margin-top: 150px;">
+        <div class="category-header">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">
+                <span data-lang-fr>Fenêtres en Aluminium</span>
+                <span data-lang-de>Aluminiumfenster</span>
+            </h2>
+        </div>
+
+        <div class="products-row">
+
+            <!-- PE 50 -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/300x300x300x300/426450_pe50-render.png" alt="PE 50">
+                </div>
+                <div class="product-item-content">
+                    <h3>PE 50</h3>
+                    <a href="ALU/product-pe50.html" class="btn-primary">
+                        <span data-lang-fr>En savoir plus</span>
+                        <span data-lang-de>Mehr erfahren</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PE 68 -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>1.4</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="https://www.witraz.eu/storage/cache/img/300x300x300x300/425992_pe68-hi-render.png" alt="PE 68">
+                </div>
+                <div class="product-item-content">
+                    <h3>PE 68 + PE 68 HI</h3>
+                    <a href="ALU/product-pe68.html" class="btn-primary">
+                        <span data-lang-fr>En savoir plus</span>
+                        <span data-lang-de>Mehr erfahren</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PE 78 N -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>0.98</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="https://www.witraz.eu/storage/cache/img/300x300x300x300/426677_pe78n-hi-render.png" alt="PE 78 N">
+                </div>
+                <div class="product-item-content">
+                    <h3>PE 78 N + PE 78 N HI</h3>
+                    <a href="ALU/product-pe78n.html" class="btn-primary">
+                        <span data-lang-fr>En savoir plus</span>
+                        <span data-lang-de>Mehr erfahren</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PE 78 EI -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/300x300x300x300/403403_pe78ei-render.png" alt="PE 78 EI">
+                </div>
+                <div class="product-item-content">
+                    <h3>PE 78 EI</h3>
+                    <a href="ALU/product-pe78ei.html" class="btn-primary">
+                        <span data-lang-fr>En savoir plus</span>
+                        <span data-lang-de>Mehr erfahren</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- SLIDING ALUMINIUM -->
+    <section id="sliding-alu" class="products-section" style="scroll-margin-top: 150px;">
+        <div class="category-header">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">
+                <span data-lang-fr>Fenêtres Coulissantes</span>
+                <span data-lang-de>Aluminium-Schiebefenster</span>
+            </h2>
+        </div>
+
+        <div class="products-row" style="max-width: 400px; margin: 0 auto 4rem;">
+
+            <!-- SL 1600 tt -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>1.1</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="https://www.witraz.eu/storage/cache/img/300x300x300x300/376852_sl-1600tt-hi-render.png" alt="SL 1600 tt">
+                </div>
+                <div class="product-item-content">
+                    <h3>SL 1600 tt</h3>
+                    <a href="ALU/product-sl1600.html" class="btn-primary">
+                        <span data-lang-fr>En savoir plus</span>
+                        <span data-lang-de>Mehr erfahren</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section style="background: var(--light-bg);">
+        <h2 class="section-title">
+            <span data-lang-fr>Les secrets de nos fenêtres en aluminium</span>
+            <span data-lang-de>Die Geheimnisse unserer Aluminiumfenster</span>
+        </h2>
+        <p class="section-subtitle">
+            <span data-lang-fr>Qualité dans chaque détail</span>
+            <span data-lang-de>Qualität in jedem Detail</span>
+        </p>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/33245_00000004561.jpg" alt="Étanchéité">
+                </div>
+                <div class="product-info">
+                    <h3>
+                        <span data-lang-fr>Systèmes d'étanchéité modernes</span>
+                        <span data-lang-de>Moderne Dichtsysteme</span>
+                    </h3>
+                    <p>
+                        <span data-lang-fr>Nos systèmes d'étanchéité sont tellement avancés qu'on n'a pas besoin de rejets d'eau supplémentaires.</span>
+                        <span data-lang-de>Unsere Dichtsysteme sind so fortschrittlich, dass keine zusätzlichen Wasserabläufe benötigt werden.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/38410_zagnaitane-naroza.jpg" alt="Angles">
+                </div>
+                <div class="product-info">
+                    <h3>
+                        <span data-lang-fr>Angles aux multiples possibilités</span>
+                        <span data-lang-de>Vielseitige Eckverbindungen</span>
+                    </h3>
+                    <p>
+                        <span data-lang-fr>Les angles des fenêtres offrent de multiples possibilités de liaison. En standard : liaisons tordues de haute précision.</span>
+                        <span data-lang-de>Fensterecken bieten vielfältige Verbindungsmöglichkeiten. Standard: hochpräzise Gehrungsverbindungen.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/86691_edpm.jpg" alt="Joints EPDM">
+                </div>
+                <div class="product-info">
+                    <h3>
+                        <span data-lang-fr>Joints EPDM haute résistance</span>
+                        <span data-lang-de>Hochresistente EPDM-Dichtungen</span>
+                    </h3>
+                    <p>
+                        <span data-lang-fr>Nous n'utilisons que des joints EPDM très résistants aux changements de température et aux intempéries.</span>
+                        <span data-lang-de>Wir verwenden ausschließlich EPDM-Dichtungen, die sehr widerstandsfähig gegenüber Temperaturwechseln sind.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/129768_depositphotos-36989611-stock-photo-curved-aluminum-profile.jpg" alt="Profilés cintrés">
+                </div>
+                <div class="product-info">
+                    <h3>
+                        <span data-lang-fr>Profilés cintrés sur mesure</span>
+                        <span data-lang-de>Maßgefertigte gebogene Profile</span>
+                    </h3>
+                    <p>
+                        <span data-lang-fr>Vous rêvez d'arcs ? La flexion des profilés en aluminium est possible pour des formes architecturales uniques.</span>
+                        <span data-lang-de>Träumen Sie von Bögen? Das Biegen von Aluminiumprofilen ist für einzigartige architektonische Formen möglich.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/83379_460.jpg" alt="Protection incendie">
+                </div>
+                <div class="product-info">
+                    <h3>
+                        <span data-lang-fr>Protection incendie certifiée</span>
+                        <span data-lang-de>Zertifizierter Brandschutz</span>
+                    </h3>
+                    <p>
+                        <span data-lang-fr>Nos systèmes EI offrent une protection incendie certifiée pour cloisons intérieures et extérieures.</span>
+                        <span data-lang-de>Unsere EI-Systeme bieten zertifizierten Brandschutz für innen und außen.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><span data-lang-fr>© 2026 MP DESIGN - Distributeur officiel en Suisse. Tous droits réservés.</span><span data-lang-de>© 2026 MP DESIGN - Offizieller Händler in der Schweiz. Alle Rechte vorbehalten.</span></p>
+
+        <div class="mpdesign-branding">
+            <div class="mpdesign-divider"></div>
+            <span class="developed-by" data-lang-fr>Développé par</span>
+            <span class="developed-by" data-lang-de>Entwickelt von</span>
+            <div class="mpdesign-logo">
+                <div class="mp-monogram">
+                    <span class="mp-letter mp-m">M</span>
+                    <span class="mp-letter mp-p">P</span>
+                    <div class="mp-monogram-glow"></div>
+                </div>
+                <div class="mp-wordmark">
+                    <span class="mp-text">DESIGN</span>
+                    <span class="mp-tagline"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Sub-navigation smooth scroll
+        document.querySelectorAll('.sub-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offset = 150;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active link highlighting on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('[id]');
+            const scrollPosition = window.scrollY + 200;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.sub-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

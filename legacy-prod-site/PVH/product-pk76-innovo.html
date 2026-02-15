@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PK76 Innovo - Witraz Швейцария</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .product-detail-container { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; }
+        .product-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .product-main-image { background: var(--light-bg); padding: 3rem; border-radius: 15px; display: flex; align-items: center; justify-content: center; position: relative; min-height: 500px; }
+        .product-main-image img { max-width: 100%; max-height: 500px; object-fit: contain; }
+        .product-details-box { display: flex; flex-direction: column; justify-content: center; }
+        .product-title { font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .product-subtitle { font-size: 1.3rem; color: var(--text-light); margin-bottom: 2rem; font-style: italic; }
+        .product-lead { font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 2rem; }
+        .product-highlight { background: linear-gradient(135deg, var(--accent-color) 0%, #d4b378 100%); color: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; font-weight: 500; }
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
+        .spec-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s ease; }
+        .spec-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .spec-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-color); font-size: 1.5rem; }
+        .spec-label { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem; }
+        .spec-value { font-size: 1.3rem; font-weight: 600; color: var(--primary-color); }
+        .features-section { background: var(--light-bg); padding: 3rem; border-radius: 15px; margin: 3rem 0; }
+        .features-section h3 { font-size: 2rem; margin-bottom: 2rem; color: var(--primary-color); }
+        .features-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .features-list li { padding: 1rem; background: white; border-radius: 8px; display: flex; align-items: start; gap: 1rem; }
+        .features-list li::before { content: '✓'; color: var(--accent-color); font-weight: bold; font-size: 1.5rem; flex-shrink: 0; }
+        .cta-section { text-align: center; padding: 3rem; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); border-radius: 15px; color: white; margin: 3rem 0; }
+        .cta-section h3 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
+        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--text-light); text-decoration: none; transition: var(--transition); }
+        .back-link:hover { color: var(--accent-color); }
+        .image-thumbnails { display: flex; gap: 1rem; margin-top: 1rem; justify-content: center; flex-wrap: wrap; }
+        .image-thumbnails img { width: 80px; height: 80px; object-fit: contain; border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; background: white; padding: 0.5rem; }
+        .image-thumbnails img:hover, .image-thumbnails img.active { border-color: var(--accent-color); transform: scale(1.1); }
+        @media (max-width: 968px) { .product-header { grid-template-columns: 1fr; } .product-title { font-size: 2rem; } }
+    </style>
+</head>
+<body data-current-lang="fr">
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">MPDESIGN</a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul>
+                <!-- FR Menu -->
+                <li data-lang-fr><a href="../index.html">Accueil</a></li>
+                <li data-lang-fr><a href="../pvh-windows.html">Fenêtres PVC</a></li>
+                <li data-lang-fr><a href="../wooden-windows.html">Fenêtres en bois</a></li>
+                <li data-lang-fr><a href="../aluminum-windows.html">Fenêtres aluminium</a></li>
+                <li data-lang-fr><a href="../doors.html">Portes</a></li>
+                <li data-lang-fr><a href="../index.html#contact">Contact</a></li>
+
+                <!-- DE Menu -->
+                <li data-lang-de><a href="../index.html">Startseite</a></li>
+                <li data-lang-de><a href="../pvh-windows.html">Kunststofffenster</a></li>
+                <li data-lang-de><a href="../wooden-windows.html">Holzfenster</a></li>
+                <li data-lang-de><a href="../aluminum-windows.html">Aluminiumfenster</a></li>
+                <li data-lang-de><a href="../doors.html">Türen</a></li>
+                <li data-lang-de><a href="../index.html#contact">Kontakt</a></li>
+
+                <!-- Language Switcher -->
+                <li class="language-switcher">
+                    <button class="lang-btn active" data-lang="fr">
+                        <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#ED2939" width="900" height="600"/>
+                            <rect fill="#fff" width="600" height="600"/>
+                            <rect fill="#002395" width="300" height="600"/>
+                        </svg>
+                        <span>FR</span>
+                    </button>
+                    <button class="lang-btn" data-lang="de">
+                        <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#000" width="900" height="200"/>
+                            <rect fill="#D00" y="200" width="900" height="200"/>
+                            <rect fill="#FFCE00" y="400" width="900" height="200"/>
+                        </svg>
+                        <span>DE</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="breadcrumb">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <a href="../index.html"><span data-lang-fr class="inline">Accueil</span><span data-lang-de class="inline">Startseite</span></a>
+            <span>→</span>
+            <a href="../pvh-windows.html"><span data-lang-fr class="inline">Fenêtres PVC</span><span data-lang-de class="inline">Kunststofffenster</span></a>
+            <span>→</span>
+            <span>PK76 Innovo</span>
+        </div>
+    </section>
+
+    <div class="product-detail-container">
+        <a href="../pvh-windows.html" class="back-link"><span data-lang-fr>← Retour aux fenêtres PVC</span><span data-lang-de>← Zurück zu PVC-Fenstern</span></a>
+
+        <div class="product-header">
+            <div>
+                <div class="product-main-image">
+                    <img id="mainImage" src="../images/pwh-win/PK76 Innovo.png" alt="PK76 Innovo">
+                </div>
+
+            </div>
+
+            <div class="product-details-box">
+                <h1 class="product-title">PK76 Innovo</h1><p class="product-subtitle" data-lang-fr>Ligne innovante Witraż</p>
+<p class="product-subtitle" data-lang-de>Innovative Witraż-Linie</p>
+                <p class="product-lead"><span data-lang-fr>Fenêtre qui réalisera vos rêves d'une maison lumineuse. Stable, avec possibilité de grandes surfaces vitrées.
+Garantit une utilisation optimale de la lumière solaire, réduisant les coûts de chauffage.</span><span data-lang-de>Fenster, das Ihre Träume von einem lichtdurchfluteten Haus erfüllt. Stabil, mit Möglichkeit großer Glasflächen.
+Garantiert optimale Nutzung des Sonnenlichts, was zu geringeren Heizkosten führt.</span></p><div class="product-highlight" data-lang-fr>PK76 INNOVO offre une excellente protection contre le bruit. Grâce à une isolation acoustique idéale, l'intérieur est 50% plus silencieux qu'à l'extérieur.
+
+PK76 INNOVO propose une riche palette de couleurs. La fenêtre est disponible en blanc ainsi qu'en large gamme de films décoratifs unis ou à structure bois.</div>
+<div class="product-highlight" data-lang-de>PK76 INNOVO bietet hervorragenden Lärmschutz. Dank idealer Schalldämmung ist es innen 50% leiser als außen.
+
+PK76 INNOVO hat eine reiche Farbpalette. Das Fenster ist in Weiß sowie in breiter Auswahl an Dekorfolien in Uni oder Holzstruktur erhältlich.</div>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                    <a href="../index.html#contact" class="btn-primary"><span data-lang-fr class="inline">Obtenir une consultation</span><span data-lang-de class="inline">Beratung erhalten</span></a>
+                    <a href="#specs" class="btn-primary" style="background: transparent; color: var(--accent-color); border: 2px solid var(--accent-color);"><span data-lang-fr class="inline">Caractéristiques</span><span data-lang-de class="inline">Eigenschaften</span></a>
+                    <a id="paletteBtn" href="#" target="_blank" class="btn-primary" style="background: transparent; color: var(--accent-color); border: 2px solid var(--accent-color);"> <span data-lang-fr class="inline">Palette de couleurs</span><span data-lang-de class="inline">Farbpalette</span></a>
+                </div>
+            </div>
+        </div>
+
+        <section id="specs">
+            <h2 class="section-title"><span data-lang-fr>Caractéristiques techniques</span><span data-lang-de>Technische Eigenschaften</span></h2>
+            <p class="section-subtitle"><span data-lang-fr>Informations détaillées sur le produit</span><span data-lang-de>Detaillierte Produktinformationen</span></p>
+            <div class="specs-grid">
+
+                <div class="spec-card">
+                    <div class="spec-icon">📏</div>
+                    <div class="spec-label"><span data-lang-fr>Profondeur du profil</span><span data-lang-de>Profiltiefe</span></div>
+                    <div class="spec-value"><span data-lang-fr>76 mm</span><span data-lang-de>76 mm</span></div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🔲</div>
+                    <div class="spec-label"><span data-lang-fr>Nombre de chambres</span><span data-lang-de>Anzahl der Kammern</span></div>
+                    <div class="spec-value">6</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🌡️</div>
+                    <div class="spec-label"><span data-lang-fr>Coefficient Uw</span><span data-lang-de>Uw-Wert</span></div>
+                    <div class="spec-value"><span data-lang-fr>0.76 W/(m²·K)</span><span data-lang-de>0.76 W/(m²·K)</span></div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🏠</div>
+                    <div class="spec-label"><span data-lang-fr>Classe</span><span data-lang-de>Klasse</span></div>
+                    <div class="spec-value"><span data-lang-fr>A - Innovation</span><span data-lang-de>A - Innovation</span></div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🪟</div>
+                    <div class="spec-label"><span data-lang-fr>Vitrage</span><span data-lang-de>Verglasung</span></div>
+                    <div class="spec-value"><span data-lang-fr>Triple</span><span data-lang-de>Dreifach</span></div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">⭐</div>
+                    <div class="spec-label"><span data-lang-fr>Système de profilés</span><span data-lang-de>Profilsystem</span></div>
+                    <div class="spec-value">Kömmerling PremiDoor</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🔒</div>
+                    <div class="spec-label"><span data-lang-fr>Ferrures</span><span data-lang-de>Beschläge</span></div>
+                    <div class="spec-value">MACO Multimatic</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">💎</div>
+                    <div class="spec-label"><span data-lang-fr>Vitrages</span><span data-lang-de>Verglasungen</span></div>
+                    <div class="spec-value">Pilkington</div>
+                </div>
+    
+            </div>
+        </section>
+
+        <div class="features-section">
+            <h3><span data-lang-fr>Avantages PK76 Innovo</span><span data-lang-de>Vorteile PK76 Innovo</span></h3>
+            <ul class="features-list">
+                <li><span data-lang-fr>Coefficient Uw jusqu'à 0.76 W/(m²·K)</span><span data-lang-de>Uw-Wert bis 0.76 W/(m²·K)</span></li>
+                <li><span data-lang-fr>Construction à 6 chambres 76 mm</span><span data-lang-de>6-Kammer-Konstruktion 76 mm</span></li>
+                <li><span data-lang-fr>Ligne innovante Witraż</span><span data-lang-de>Innovative Witraż-Linie</span></li>
+                <li><span data-lang-fr>Excellente efficacité énergétique</span><span data-lang-de>Hervorragende Energieeffizienz</span></li>
+                <li><span data-lang-fr>Bonne isolation acoustique</span><span data-lang-de>Gute Schalldämmung</span></li>
+                <li><span data-lang-fr>Rapport qualité/prix optimal</span><span data-lang-de>Optimales Preis-Leistungs-Verhältnis</span></li>
+            </ul>
+        </div>
+
+        <section style="background: white; padding: 3rem; border-radius: 15px; margin: 3rem 0;">
+            <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-color);"><span data-lang-fr>Pour qui convient PK76 Innovo?</span><span data-lang-de>Für wen ist PK76 Innovo geeignet?</span></h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🏡 <span data-lang-fr>Maisons privées</span><span data-lang-de>Privathäuser</span></h4>
+                    <p style="color: var(--text-light); line-height: 1.8;"><span data-lang-fr>Solution idéale pour un séjour confortable</span><span data-lang-de>Ideale Lösung für komfortables Wohnen</span></p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🏢 <span data-lang-fr>Appartements</span><span data-lang-de>Wohnungen</span></h4>
+                    <p style="color: var(--text-light); line-height: 1.8;"><span data-lang-fr>Vitrage moderne pour conditions urbaines</span><span data-lang-de>Moderne Verglasung für städtische Bedingungen</span></p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">💰 <span data-lang-fr>Économies</span><span data-lang-de>Einsparungen</span></h4>
+                    <p style="color: var(--text-light); line-height: 1.8;"><span data-lang-fr>Réduction des coûts de chauffage toute l'année</span><span data-lang-de>Reduzierung der Heizkosten das ganze Jahr über</span></p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🎨 <span data-lang-fr>Design</span><span data-lang-de>Design</span></h4>
+                    <p style="color: var(--text-light); line-height: 1.8;"><span data-lang-fr>Large choix de couleurs et configurations</span><span data-lang-de>Große Auswahl an Farben und Konfigurationen</span></p>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <h3><span data-lang-fr>Intéressé par PK76 Innovo?</span><span data-lang-de>Interessiert an PK76 Innovo?</span></h3>
+            <p><span data-lang-fr class="inline">Contactez-nous pour une consultation détaillée et un calcul des coûts</span><span data-lang-de class="inline">Kontaktieren Sie uns für eine ausführliche Beratung und Kostenberechnung</span></p>
+            <a href="../index.html#contact" class="btn-primary" style="background: var(--accent-color);"><span data-lang-fr class="inline">Obtenir une consultation</span><span data-lang-de class="inline">Beratung erhalten</span></a>
+        </div>
+    </div>
+
+    <footer>
+        <p><span data-lang-fr>© 2026 MP DESIGN - Distributeur officiel en Suisse. Tous droits réservés.</span><span data-lang-de>© 2026 MP DESIGN - Offizieller Händler in der Schweiz. Alle Rechte vorbehalten.</span></p>
+
+        <div class="mpdesign-branding">
+            <div class="mpdesign-divider"></div>
+            <span class="developed-by" data-lang-fr>Développé par</span>
+            <span class="developed-by" data-lang-de>Entwickelt von</span>
+            <div class="mpdesign-logo">
+                <div class="mp-monogram">
+                    <span class="mp-letter mp-m">M</span>
+                    <span class="mp-letter mp-p">P</span>
+                    <div class="mp-monogram-glow"></div>
+                </div>
+                <div class="mp-wordmark">
+                    <span class="mp-text">DESIGN</span>
+                    <span class="mp-tagline"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        function changeMainImage(thumbnail) {
+            document.getElementById('mainImage').src = thumbnail.src;
+            document.querySelectorAll('.image-thumbnails img').forEach(img => img.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+        // Кнопка палитры
+        const paletteLinks = {
+            de: '../images/pwh-mat/trocal-2024-de-2.png',
+            fr: '../images/pwh-mat/trocal-2024-fr_1.png'
+        };
+
+
+        function updatePaletteBtn() {
+            const lang = document.body.getAttribute('data-current-lang') || 'fr';
+            const btn = document.getElementById('paletteBtn');
+            if (btn) btn.href = paletteLinks[lang] || paletteLinks['fr'];
+        }
+
+        updatePaletteBtn();
+        const observer = new MutationObserver(updatePaletteBtn);
+        observer.observe(document.body, { attributes: true, attributeFilter: ['data-current-lang'] });
+    </script>
+</body>
+</html>

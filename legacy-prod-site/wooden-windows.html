@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenêtres en Bois - Witraz Suisse / Holzfenster - Witraz Schweiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .products-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-color);
+            padding: 0.5rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .products-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .product-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-item-image {
+            background: var(--light-bg);
+            padding: 2rem;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .product-item-image img {
+            max-width: 90%;
+            max-height: 280px;
+            object-fit: contain;
+        }
+        
+        .uw-badge-circle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+            z-index: 10;
+        }
+        
+        .uw-value {
+            font-size: 1rem;
+            line-height: 1;
+        }
+        
+        .uw-label {
+            font-size: 0.6rem;
+            margin-top: 2px;
+        }
+        
+        .product-item-content {
+            padding: 1.5rem;
+        }
+        
+        .product-item-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .product-item-content .btn-primary {
+            padding: 0.8rem 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+<body data-current-lang="fr">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">MPDESIGN</a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul>
+                <li data-lang-fr><a href="index.html">Accueil</a></li>
+                <li data-lang-de><a href="index.html">Startseite</a></li>
+
+                <li data-lang-fr><a href="pvh-windows.html">Fenêtres PVC</a></li>
+                <li data-lang-de><a href="pvh-windows.html">Kunststofffenster</a></li>
+
+                <li data-lang-fr><a href="wooden-windows.html">Fenêtres en bois</a></li>
+                <li data-lang-de><a href="wooden-windows.html">Holzfenster</a></li>
+
+                <li data-lang-fr><a href="aluminum-windows.html">Fenêtres aluminium</a></li>
+                <li data-lang-de><a href="aluminum-windows.html">Aluminiumfenster</a></li>
+
+                <li data-lang-fr><a href="doors.html">Portes</a></li>
+                <li data-lang-de><a href="doors.html">Türen</a></li>
+
+                <li data-lang-fr><a href="index.html#contact">Contact</a></li>
+                <li data-lang-de><a href="index.html#contact">Kontakt</a></li>
+
+                <li class="language-switcher">
+                    <button class="lang-btn active" data-lang="fr">
+                        <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#ED2939" width="900" height="600"/>
+                            <rect fill="#fff" width="600" height="600"/>
+                            <rect fill="#002395" width="300" height="600"/>
+                        </svg>
+                        <span>FR</span>
+                    </button>
+                    <button class="lang-btn" data-lang="de">
+                        <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#000" width="900" height="200"/>
+                            <rect fill="#D00" y="200" width="900" height="200"/>
+                            <rect fill="#FFCE00" y="400" width="900" height="200"/>
+                        </svg>
+                        <span>DE</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="breadcrumb">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <a href="index.html"><span data-lang-fr class="inline">Accueil</span><span data-lang-de class="inline">Startseite</span></a>
+            <span>→</span>
+            <span><span data-lang-fr class="inline">Fenêtres en Bois</span><span data-lang-de class="inline">Holzfenster</span></span>
+        </div>
+    </section>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-content">
+            <h1><span data-lang-fr class="inline">Fenêtres en Bois</span><span data-lang-de class="inline">Holzfenster</span></h1>
+            <p><span data-lang-fr class="inline">Des fenêtres en bois bien conçues donnent un sentiment de sécurité</span><span data-lang-de class="inline">Gut durchdachte Holzfenster geben ein Gefühl der Sicherheit</span></p>
+        </div>
+    </section>
+
+    <!-- Sub Navigation -->
+    <section style="background: var(--light-bg); padding: 0; position: sticky; top: 80px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow-x: hidden;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <nav class="sub-nav" style="overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;">
+                <a href="#wooden" class="sub-nav-link"><span data-lang-fr class="inline">FENÊTRES EN BOIS</span><span data-lang-de class="inline">HOLZFENSTER</span></a>
+                <a href="#wood-aluminum" class="sub-nav-link"><span data-lang-fr class="inline">BOIS-ALUMINIUM</span><span data-lang-de class="inline">HOLZ-ALUMINIUM</span></a>
+                <a href="#special" class="sub-nav-link"><span data-lang-fr class="inline">FENÊTRES SPÉCIALES</span><span data-lang-de class="inline">SONDERFENSTER</span></a>
+                <a href="#sliding" class="sub-nav-link"><span data-lang-fr class="inline">FENÊTRES COULISSANTES</span><span data-lang-de class="inline">SCHIEBEFENSTER</span></a>
+            </nav>
+            <style>
+                .sub-nav::-webkit-scrollbar {
+                    display: none;
+                }
+            </style>
+        </div>
+    </section>
+
+    <!-- WOODEN WINDOWS -->
+    <section id="wooden" class="products-section" style="scroll-margin-top: 150px;">
+        <div class="category-header">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;"><span data-lang-fr>Fenêtres en Bois</span><span data-lang-de>Holzfenster</span></h2>
+        </div>
+
+        <div class="products-row">
+            <!-- Ecoline -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>1.3</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/ecoline_1.png" alt="Ecoline">
+                </div>
+                <div class="product-item-content">
+                    <h3>Ecoline</h3>
+                    <a href="WOOD/product-ecoline.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Thermoline -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>0.98</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/Thermoline.png" alt="Thermoline">
+                </div>
+                <div class="product-item-content">
+                    <h3>Thermoline</h3>
+                    <a href="WOOD/product-thermoline.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Ecotherm -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>0.77</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/Ecotherm.png" alt="Ecotherm">
+                </div>
+                <div class="product-item-content">
+                    <h3>Ecotherm</h3>
+                    <a href="WOOD/product-ecotherm.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Retro -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>1.3</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/Retro_1.png" alt="Retro">
+                </div>
+                <div class="product-item-content">
+                    <h3>Retro</h3>
+                    <a href="WOOD/product-retro.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- WOOD-ALUMINUM WINDOWS -->
+    <section id="wood-aluminum" class="products-section" style="scroll-margin-top: 150px;">
+        <div class="category-header">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;"><span data-lang-fr>Fenêtres Bois-Aluminium</span><span data-lang-de>Holz-Aluminium Fenster</span></h2>
+        </div>
+
+        <div class="products-row">
+            <!-- Duo Regular -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>0.8</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/Duo Classic.png" alt="Duo Regular">
+                </div>
+                <div class="product-item-content">
+                    <h3>Duo Regular</h3>
+                    <a href="WOOD/product-duo-regular.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Duo Modern -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>0.8</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/Duo Modern.png" alt="Duo Modern">
+                </div>
+                <div class="product-item-content">
+                    <h3>Duo Modern</h3>
+                    <a href="WOOD/product-duo-modern.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- SPECIAL WINDOWS -->
+    <section id="special" class="products-section" style="scroll-margin-top: 150px;">
+        <div class="category-header">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;"><span data-lang-fr>Fenêtres Spéciales</span><span data-lang-de>Sonderfenster</span></h2>
+        </div>
+
+        <div class="products-row">
+            <!-- Renovation Profile -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="images/wood-win/renovation window.png" alt="Profil de Rénovation">
+                </div>
+                <div class="product-item-content">
+                    <h3><span data-lang-fr>Profil de Rénovation</span><span data-lang-de>Renovierungsprofil</span></h3>
+                    <a href="WOOD/product-renovation.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Casement -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="images/wood-win/Casement.png" alt="Casement">
+                </div>
+                <div class="product-item-content">
+                    <h3>Casement (56, 68)</h3>
+                    <a href="WOOD/product-casement.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Sash -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="images/wood-win/Sash_1.png" alt="Sash">
+                </div>
+                <div class="product-item-content">
+                    <h3>Sash 56, 68</h3>
+                    <a href="WOOD/product-sash.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- IPA -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="images/wood-win/IPA.png" alt="IPA">
+                </div>
+                <div class="product-item-content">
+                    <h3>IPA</h3>
+                    <a href="WOOD/product-ipa.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- Pivot Window -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="images/wood-win/Rotating Window.png" alt="Fenêtre Pivotante">
+                </div>
+                <div class="product-item-content">
+                    <h3><span data-lang-fr>Fenêtre Pivotante</span><span data-lang-de>Drehfenster</span></h3>
+                    <a href="WOOD/product-pivot.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- SLIDING WINDOWS -->
+    <section id="sliding" class="products-section" style="scroll-margin-top: 150px;">
+        <div class="category-header">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;"><span data-lang-fr>Fenêtres Coulissantes en Bois</span><span data-lang-de>Holz-Schiebefenster</span></h2>
+        </div>
+
+        <div class="products-row">
+            <!-- Witraz SKB -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <img src="images/wood-win/Witraz SKB.png" alt="Witraz SKB">
+                </div>
+                <div class="product-item-content">
+                    <h3>Witraż SKB</h3>
+                    <a href="WOOD/product-witraz-skb.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+
+            <!-- HS Witraz Slide -->
+            <div class="product-item">
+                <div class="product-item-image">
+                    <div class="uw-badge-circle">
+                        <span class="uw-value">Uw<br>0.8</span>
+                        <span class="uw-label">W/(m²·K)</span>
+                    </div>
+                    <img src="images/wood-win/HS Witraz Slide_1.png" alt="HS Witraz Slide">
+                </div>
+                <div class="product-item-content">
+                    <h3>HS Witraż Slide</h3>
+                    <a href="WOOD/product-hs-slide.html" class="btn-primary"><span data-lang-fr>En savoir plus</span><span data-lang-de>Mehr erfahren</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section style="background: var(--light-bg);">
+        <h2 class="section-title"><span data-lang-fr>Les secrets de nos fenêtres en bois</span><span data-lang-de>Die Geheimnisse unserer Holzfenster</span></h2>
+        <p class="section-subtitle"><span data-lang-fr>Qualité dans chaque détail</span><span data-lang-de>Qualität in jedem Detail</span></p>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/48623_04.jpg" alt="Bois lamellé">
+                </div>
+                <div class="product-info">
+                    <h3><span data-lang-fr>Profils en bois lamellé-collé</span><span data-lang-de>Profile aus Brettschichtholz</span></h3>
+                    <p><span data-lang-fr>Grâce à cela, votre fenêtre ne se déformera pas et ne perdra pas ses paramètres d'isolation importants.</span><span data-lang-de>Dadurch verformt sich Ihr Fenster nicht und verliert keine wichtigen Isolierparameter.</span></p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/57077_03.jpg" alt="Imprégnation">
+                </div>
+                <div class="product-info">
+                    <h3><span data-lang-fr>Imprégnation avant assemblage</span><span data-lang-de>Imprägnierung vor der Montage</span></h3>
+                    <p><span data-lang-fr>L'imprégnation du bois se fait avant l'assemblage des profils. C'est pourquoi il est si résistant à la dégradation.</span><span data-lang-de>Die Imprägnierung des Holzes erfolgt vor dem Zusammenbau der Profile. Deshalb ist es so widerstandsfähig.</span></p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/343798_okapnik-srebrny.png" alt="Larmier">
+                </div>
+                <div class="product-info">
+                    <h3><span data-lang-fr>Larmier en aluminium durable</span><span data-lang-de>Langlebige Aluminium-Tropfkante</span></h3>
+                    <p><span data-lang-fr>Le larmier en aluminium avec joint d'étanchéité protège efficacement le bois contre les effets destructeurs de l'eau.</span><span data-lang-de>Die Aluminium-Tropfkante mit Dichtung schützt das Holz wirksam vor den zerstörerischen Wirkungen von Wasser.</span></p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/536517_wajcha-sl-ruchomego2.jpg" alt="Quincaillerie">
+                </div>
+                <div class="product-info">
+                    <h3><span data-lang-fr>Quincaillerie de haute qualité Winkhaus</span><span data-lang-de>Hochwertige Winkhaus-Beschläge</span></h3>
+                    <p><span data-lang-fr>Micro-ventilation, verrou intégré, blocage de position incorrecte de la poignée - tout cela en standard.</span><span data-lang-de>Mikrolüftung, integrierte Sperre, Fehlbedienungssperre des Griffs - alles standardmäßig.</span></p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.witraz.eu/storage/cache/img/360x250/73666_02.jpg" alt="Entretien">
+                </div>
+                <div class="product-info">
+                    <h3><span data-lang-fr>Entretien facile</span><span data-lang-de>Einfache Wartung</span></h3>
+                    <p><span data-lang-fr>Nos fenêtres en bois n'ont pas besoin d'être peintes tous les quelques ans. Il suffit de les nettoyer deux fois par an.</span><span data-lang-de>Unsere Holzfenster müssen nicht alle paar Jahre gestrichen werden. Es genügt, sie zweimal im Jahr zu reinigen.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><span data-lang-fr>© 2026 MP DESIGN - Distributeur officiel en Suisse. Tous droits réservés.</span><span data-lang-de>© 2026 MP DESIGN - Offizieller Händler in der Schweiz. Alle Rechte vorbehalten.</span></p>
+
+        <div class="mpdesign-branding">
+            <div class="mpdesign-divider"></div>
+            <span class="developed-by" data-lang-fr>Développé par</span>
+            <span class="developed-by" data-lang-de>Entwickelt von</span>
+            <div class="mpdesign-logo">
+                <div class="mp-monogram">
+                    <span class="mp-letter mp-m">M</span>
+                    <span class="mp-letter mp-p">P</span>
+                    <div class="mp-monogram-glow"></div>
+                </div>
+                <div class="mp-wordmark">
+                    <span class="mp-text">DESIGN</span>
+                    <span class="mp-tagline"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Sub-navigation smooth scroll
+        document.querySelectorAll('.sub-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offset = 150;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active link highlighting on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('[id]');
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.sub-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -76,16 +76,21 @@ function doPost(e) {
       body.consent,
     ]);
 
-    sendTelegramNotification({
-      leadId: leadId,
-      locale: body.locale,
-      sourcePage: body.sourcePage,
-      productSlug: body.productSlug,
-      name: body.name,
-      phone: body.phone,
-      email: body.email,
-      message: body.message,
-    });
+    // Telegram should never block lead capture (Sheets is the source of truth).
+    try {
+      sendTelegramNotification({
+        leadId: leadId,
+        locale: body.locale,
+        sourcePage: body.sourcePage,
+        productSlug: body.productSlug,
+        name: body.name,
+        phone: body.phone,
+        email: body.email,
+        message: body.message,
+      });
+    } catch (telegramError) {
+      Logger.log(telegramError);
+    }
 
     return jsonResponse({ ok: true, leadId: leadId, timestamp: timestamp });
   } catch (error) {
@@ -256,18 +261,28 @@ function sendTelegramNotification(payload) {
     "Message: " + payload.message,
   ];
 
+  // Telegram text limit is 4096 characters.
+  var text = lines.join("\n");
+  if (text.length > 3900) {
+    text = text.slice(0, 3900) + "\n...";
+  }
+
   var url = "https://api.telegram.org/bot" + token + "/sendMessage";
   var params = {
     method: "post",
     contentType: "application/json",
     payload: JSON.stringify({
       chat_id: chatId,
-      text: lines.join("\n"),
+      text: text,
     }),
     muteHttpExceptions: true,
   };
 
-  UrlFetchApp.fetch(url, params);
+  try {
+    UrlFetchApp.fetch(url, params);
+  } catch (error) {
+    Logger.log(error);
+  }
 }
 
 function jsonResponse(payload) {
@@ -275,4 +290,3 @@ function jsonResponse(payload) {
   output.setMimeType(ContentService.MimeType.JSON);
   return output;
 }
-
