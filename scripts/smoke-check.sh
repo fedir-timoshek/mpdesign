@@ -32,15 +32,16 @@ DE_HTML="$(curl -fsSL --max-time 20 "$BASE_URL/de/windows/pvc/")"
 SITEMAP_XML="$(curl -fsSL --max-time 20 "$BASE_URL/sitemap.xml")"
 
 if [[ "${SMOKE_EXPECT_NOINDEX:-}" == "1" ]]; then
-  echo "$ROBOTS_TXT" | grep -Eiq '^Disallow:\s*/\s*$'
-  echo "$FR_HTML" | grep -Eiq '<meta[^>]*name="robots"[^>]*content="[^"]*noindex'
+  # Avoid pipelines here to prevent SIGPIPE when grep exits early under `set -o pipefail`.
+  grep -Eiq '^Disallow:\s*/\s*$' <<<"$ROBOTS_TXT"
+  grep -Eiq '<meta[^>]*name="robots"[^>]*content="[^"]*noindex' <<<"$FR_HTML"
 fi
 
-echo "$FR_HTML" | grep -Eiq 'rel="canonical"[^>]*href="[^"]*/fr/windows/pvc/?'
-echo "$FR_HTML" | grep -Eiq 'rel="alternate"[^>]*href[Ll]ang="de"[^>]*href="[^"]*/de/windows/pvc/?'
-echo "$DE_HTML" | grep -Eiq 'rel="canonical"[^>]*href="[^"]*/de/windows/pvc/?'
-echo "$DE_HTML" | grep -Eiq 'rel="alternate"[^>]*href[Ll]ang="fr"[^>]*href="[^"]*/fr/windows/pvc/?'
-echo "$SITEMAP_XML" | grep -Eq '/fr/'
-echo "$SITEMAP_XML" | grep -Eq '/de/'
+grep -Eiq 'rel="canonical"[^>]*href="[^"]*/fr/windows/pvc/?' <<<"$FR_HTML"
+grep -Eiq 'rel="alternate"[^>]*href[Ll]ang="de"[^>]*href="[^"]*/de/windows/pvc/?' <<<"$FR_HTML"
+grep -Eiq 'rel="canonical"[^>]*href="[^"]*/de/windows/pvc/?' <<<"$DE_HTML"
+grep -Eiq 'rel="alternate"[^>]*href[Ll]ang="fr"[^>]*href="[^"]*/fr/windows/pvc/?' <<<"$DE_HTML"
+grep -Eq '/fr/' <<<"$SITEMAP_XML"
+grep -Eq '/de/' <<<"$SITEMAP_XML"
 
 echo "Smoke checks passed for $BASE_URL"
