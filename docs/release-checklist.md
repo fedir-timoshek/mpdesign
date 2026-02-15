@@ -32,6 +32,7 @@
 - [ ] Push to `main` and wait for `CI-CD` workflow success
 - [ ] Staging deploy job success
 - [ ] Staging smoke checks success (workflow step `Smoke check staging`)
+- [ ] Confirm staging is noindex and HTML loads its CSS/JS chunks (no missing `_next` assets)
 - [ ] Manual lead check on staging:
 - [ ] form submit returns `{ ok: true }`
 - [ ] row appears in Sheets

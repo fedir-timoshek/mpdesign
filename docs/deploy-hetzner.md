@@ -57,6 +57,7 @@ Checks:
 - FR/DE core routes
 - canonical/hreflang presence
 - sitemap contains FR/DE URLs
+- asset sanity check (one CSS + one JS chunk referenced by HTML)
 
 Local manual run:
 
@@ -69,3 +70,10 @@ npm run smoke:site -- https://example.com
 1. Re-run deployment for last stable production tag.
 2. If workflow artifact is unavailable, upload previous `out/` snapshot via SFTP.
 3. Re-run smoke checks against recovered version.
+
+## Notes About Consistent Deploys
+
+Deploy job uploads hashed assets (`out/_next`, `out/assets`) first to avoid situations where HTML points to
+missing chunk files during an interrupted transfer.
+
+We intentionally avoid remote `--delete` to reduce the risk of breaking previously deployed pages during partial deploys.

@@ -14,6 +14,21 @@
   - input: `locale, sourcePage, productSlug, name, phone, email, message, consent, honeypot`
   - output: `{ ok, leadId, timestamp, errorCode }`
 
+## Deploy (Web App)
+
+This project is designed to be bound to a Google Sheet (it uses `SpreadsheetApp.getActiveSpreadsheet()`).
+
+1. Open the Apps Script project.
+2. Click **Deploy** -> **New deployment**.
+3. Select type **Web app**.
+4. Set **Execute as**: `Me`.
+5. Set **Who has access**: `Anyone`.
+6. Click **Deploy** and copy the Web App URL.
+
+Put the URL into GitHub Secrets:
+
+- `NEXT_PUBLIC_LEAD_ENDPOINT`
+
 ### Browser CORS note (important)
 
 Apps Script Web Apps return CORS headers for `POST`, but **do not** handle `OPTIONS` preflight.
@@ -32,6 +47,10 @@ In Apps Script > Project Settings > Script Properties:
 - `TELEGRAM_CHAT_ID`
 - `RATE_LIMIT_PER_HOUR` (optional, default `5`)
 - `DUPLICATE_WINDOW_SECONDS` (optional, default `600`)
+
+Step-by-step guide:
+
+- `/Users/ftimoshek/Desktop/MPDesign/проект/docs/telegram-runbook.md`
 
 ## Anti-spam and validation
 
