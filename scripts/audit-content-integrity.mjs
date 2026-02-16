@@ -76,7 +76,6 @@ function writeReport({ totals, errors, warnings, strictModes }) {
   const lines = [];
   lines.push("# Content Integrity Report");
   lines.push("");
-  lines.push(`Generated: ${new Date().toISOString()}`);
   lines.push(`Strict placeholders: ${strictModes.placeholders ? "on" : "off"}`);
   lines.push(`Strict palette coverage: ${strictModes.palette ? "on" : "off"}`);
   lines.push("");
