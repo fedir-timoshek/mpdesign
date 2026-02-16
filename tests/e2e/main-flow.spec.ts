@@ -36,6 +36,33 @@ test("de category page renders products", async ({ page }) => {
   await expect(page.locator("article.product-card").first()).toBeVisible();
 });
 
+test("header contact CTA scrolls to the lead form on category pages", async ({ page }) => {
+  await page.goto("/fr/windows/pvc/");
+  await page.evaluate(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).dataLayer = [];
+  });
+
+  await page.getByRole("link", { name: /^Contact$/i }).click();
+  await expect(page.locator("#lead-form")).toBeInViewport();
+
+  await expect
+    .poll(async () =>
+      page.evaluate(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const events = ((window as any).dataLayer || []) as Array<Record<string, string>>;
+        return events.some(
+          (event) =>
+            event.event === "cta_click" &&
+            event.channel === "form" &&
+            event.placement === "header_contact" &&
+            event.locale === "fr",
+        );
+      }),
+    )
+    .toBeTruthy();
+});
+
 test("fr/de pages expose canonical and hreflang links", async ({ page }) => {
   await page.goto("/fr/windows/pvc/");
 
