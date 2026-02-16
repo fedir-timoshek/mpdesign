@@ -57,7 +57,7 @@ npm run release:check
 - Runs dedicated UX quality scenarios for product interactions (keyboard gallery control, mobile swipe, sticky CTA behavior).
 
 8. `content:audit:strict`
-- Production-readiness gate.
+- Release-readiness gate (staging).
 - In addition to base integrity checks, fails on placeholder-like specs/text and weak palette coverage.
 
 9. `release:check`
@@ -104,9 +104,7 @@ npm run content:audit:strict
 2. Push to `main` for staging deploy.
 3. Confirm workflow step `Smoke check staging` is green.
 4. Validate lead pipeline manually on staging (form -> Sheets -> Telegram).
-5. Create production release tag `v*`.
-6. Confirm workflow step `Smoke check production` is green.
-7. Start 7-day post-release monitoring.
+5. Start 7-day post-release monitoring.
 
 ## Go-Live Smoke Protocol
 
@@ -128,31 +126,31 @@ Manual local example:
 npm run smoke:site -- https://example.com
 ```
 
-## How Sync Affects Production
+## How Sync Affects Staging (Short Version)
 
 - Sync scripts modify only repository data (`src/data/content.local.json`) and local assets (`public/assets/supplier`).
-- Production website changes only after:
+- Staging website changes only after:
 1. Committing updated files to GitHub.
 2. CI passing.
-3. Deployment to staging/production.
+3. Deployment to staging.
 - If no deploy happened, running sync locally does not affect live site.
 
 ## Current Blocking Signals To Watch
 
 - `content:audit` fails if any supplier image is still remote (`https://www.witraz.eu/...`).
 - `content:audit:strict` fails if product specs still contain placeholders like `A confirmer` / `Zu bestaetigen`.
-- Treat these two failures as hard blockers for production cutover.
+- Treat these two failures as hard blockers for staging deploy.
 
-## User-Provided Inputs Needed Before Production
+## User-Provided Inputs Needed Before Staging Deploy
 
 - Final legal/company details for FR/DE legal pages.
 - Final contact values (phone, WhatsApp, email).
-- Domain/SSL and Cloudflare token for production analytics.
-- Hetzner staging/production credentials in GitHub secrets.
-- Staging and production public URLs for smoke checks (`HETZNER_STAGING_URL`, `HETZNER_PRODUCTION_URL`).
+- Cloudflare token for analytics (optional).
+- Hetzner staging credentials in GitHub secrets.
+- Staging public URL for smoke checks (`HETZNER_STAGING_URL`).
 
 ## Rollback Procedure
 
-1. Re-run deployment for last stable release tag.
+1. Re-run deployment for the last stable commit on `main`.
 2. If needed, upload previous `out/` build to Hetzner path via SFTP.
 3. Re-run smoke checks against restored version.

@@ -4,7 +4,7 @@ import Script from "next/script";
 import { getPublicSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const deployEnv = process.env.SITE_DEPLOY_ENV || "production";
+const deployEnv = process.env.SITE_DEPLOY_ENV || "staging";
 const isStaging = deployEnv === "staging";
 
 const headingFont = Cormorant_Garamond({

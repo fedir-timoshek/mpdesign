@@ -1,4 +1,4 @@
-# Release Checklist (Staging -> Production)
+# Release Checklist (Staging Only)
 
 ## A. Team-Only Gates (no client input required)
 
@@ -25,7 +25,7 @@
 - [ ] GitHub Secrets for Hetzner + endpoints + analytics
 - [ ] Apps Script lead endpoint URL published
 - [ ] Telegram and Google Sheets lead flow validated
-- [ ] Domain + DNS + SSL + redirects in Cloudflare validated
+- [ ] Cloudflare proxy + SSL validated for staging subdomain
 
 ## C. Staging Cutover
 
@@ -37,26 +37,15 @@
 - [ ] form submit returns `{ ok: true }`
 - [ ] row appears in Sheets
 - [ ] 1 Telegram message received
-
-## D. Production Cutover
-
-- [ ] Create release tag `v*` (example `v1.0.0`)
-- [ ] Production deploy job success
-- [ ] Production smoke checks success (workflow step `Smoke check production`)
-- [ ] Manual live checks:
-- [ ] homepage FR/DE, key categories, key products
-- [ ] mobile sticky CTA (WhatsApp/Call/Form)
-- [ ] legal pages FR/DE
-- [ ] sitemap/robots reachable from live domain
-
-## E. Post-Release Monitoring (first 7 days)
+ 
+## D. Post-Release Monitoring (first 7 days)
 
 - [ ] Daily lead pipeline check (form -> Sheets -> Telegram)
 - [ ] Daily 404/critical page check
 - [ ] Weekly review of CTA analytics events (WhatsApp/Call/Form)
 
-## F. Rollback
+## E. Rollback
 
-- [ ] Re-run workflow for last stable release tag
+- [ ] Re-run workflow for last stable `main` commit
 - [ ] If needed, upload previous `out/` artifact manually via SFTP
 - [ ] Re-run smoke check against restored version

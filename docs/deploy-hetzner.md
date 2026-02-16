@@ -1,27 +1,25 @@
-# Hetzner Deployment (GitHub Actions + SFTP)
+# Hetzner Deployment (Staging Only: GitHub Actions + SFTP)
 
-## Branch/Tag Strategy
+This repository is currently **staging-only**.
 
-- `main` -> staging deploy
-- tag `v*` -> production deploy
+- Push to `main` -> staging deploy
+- Production deploy is intentionally disabled (out of scope right now).
 
-## Required GitHub Secrets
+## Required GitHub Secrets (Staging)
 
 - `HETZNER_HOST`
 - `HETZNER_USERNAME`
 - `HETZNER_PASSWORD`
 - `HETZNER_STAGING_PATH` (example `/staging`)
-- `HETZNER_PRODUCTION_PATH` (example `/`)
 - `HETZNER_STAGING_URL` (example `https://staging.example.com` or `https://example.com/staging`)
-- `HETZNER_PRODUCTION_URL` (example `https://example.com`)
-- `NEXT_PUBLIC_SITE_URL` (production canonical domain)
+- `NEXT_PUBLIC_SITE_URL` (set to the staging canonical URL)
 - `NEXT_PUBLIC_LEAD_ENDPOINT`
 - `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` (optional)
 - `CONTENT_API_URL` (optional)
 
 Notes:
 - On Hetzner Webhosting, the SFTP user home directory typically maps to `public_html/`.
-  That is why `HETZNER_PRODUCTION_PATH` is usually `/` (not `/public_html`) and staging is `/staging`.
+  That is why `HETZNER_STAGING_PATH` is usually `/staging` (not `/public_html/staging`).
 
 ## Build Artifact
 
@@ -50,7 +48,7 @@ Recommended baseline headers (via Cloudflare if needed):
 
 ## Post-Deploy Smoke Protocol
 
-Workflow runs `bash scripts/smoke-check.sh "<base-url>"` after both staging and production deploys.
+Workflow runs `bash scripts/smoke-check.sh "<base-url>"` after staging deploy.
 
 Checks:
 - `robots.txt`, `sitemap.xml`
@@ -67,9 +65,9 @@ npm run smoke:site -- https://example.com
 
 ## Rollback
 
-1. Re-run deployment for last stable production tag.
-2. If workflow artifact is unavailable, upload previous `out/` snapshot via SFTP.
-3. Re-run smoke checks against recovered version.
+1. Re-run the last successful `CI-CD` workflow run for `main` (staging deploy).
+2. If you need a manual rollback, upload a previous `out/` snapshot via SFTP to the staging path.
+3. Re-run smoke checks against the restored version.
 
 ## Notes About Consistent Deploys
 

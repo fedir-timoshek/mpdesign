@@ -1,16 +1,16 @@
-# Cloudflare Runbook (DNS + SSL + Web Analytics)
+# Cloudflare Runbook (Staging: DNS + SSL + Web Analytics)
 
-This runbook is written for the domain:
+This repository currently targets **staging only**.
 
-- `mpdesign-windows.ch` (canonical, no `www`)
-- `staging.mpdesign-windows.ch` (staging)
+Important: Cloudflare is configured at the **zone** level (the apex domain), even if you only use the
+`staging.<domain>` subdomain.
 
 ## 1) Add Site
 
 1. Log in to Cloudflare.
 2. Click **Add a site**.
 3. Enter `mpdesign-windows.ch`.
-4. Select plan **Free** (enough for Web Analytics + proxy + redirects).
+4. Select plan **Free** (enough for Web Analytics + proxy).
 5. Continue and let Cloudflare scan existing DNS records.
 
 ## 2) Switch Nameservers (Registrar: Infomaniak)
@@ -31,27 +31,12 @@ Notes:
 Create/confirm these records in **Cloudflare -> DNS**:
 
 - `A` record:
-  - Name: `@`
-  - Value: `78.46.157.243`
-  - Proxy: **Proxied** (orange cloud)
-- `AAAA` record:
-  - Name: `@`
-  - Value: `2a01:4f8:d0a:52c6::2`
-  - Proxy: **Proxied**
-- `A` record:
   - Name: `staging`
   - Value: `78.46.157.243`
   - Proxy: **Proxied**
 - `AAAA` record:
   - Name: `staging`
   - Value: `2a01:4f8:d0a:52c6::2`
-  - Proxy: **Proxied**
-
-Optional:
-
-- `CNAME`:
-  - Name: `www`
-  - Target: `@`
   - Proxy: **Proxied**
 
 ## 4) SSL/TLS
@@ -64,18 +49,12 @@ In **Cloudflare -> SSL/TLS**:
 
 Important:
 
-- Do not enable HSTS until production is verified to work correctly over HTTPS end-to-end.
+- For staging, HSTS is not needed. Keep it off.
 
-## 5) Redirects (Recommended)
-
-In **Cloudflare -> Rules -> Redirect Rules**:
-
-- Redirect `www.mpdesign-windows.ch/*` -> `https://mpdesign-windows.ch/$1` (301)
-
-## 6) Web Analytics
+## 5) Web Analytics (Staging)
 
 1. Go to **Cloudflare -> Analytics & Logs -> Web Analytics**.
-2. Create a site for `mpdesign-windows.ch`.
+2. Create a site for `staging.mpdesign-windows.ch`.
 3. Copy the **token**.
 4. Put the token into GitHub Secrets as:
    - `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`
@@ -93,5 +72,3 @@ Check page source contains:
 Also check robots:
 
 - staging must be `Disallow: /` (noindex)
-- production must allow crawling and expose sitemap
-

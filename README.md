@@ -1,6 +1,6 @@
 # MPDESIGN Website (FR/DE)
 
-Production-oriented showcase website for windows and doors, built with Next.js App Router + TypeScript and exported as static files for Hetzner Webhosting S.
+Staging-first showcase website for windows and doors, built with Next.js App Router + TypeScript and exported as static files for Hetzner Webhosting S.
 
 ## Key Features
 
@@ -106,23 +106,23 @@ npm run content:audit
 - `content:normalize`: normalizes brand spelling (e.g. `Witraż` -> `Witraz`) to keep FR/DE copy clean.
 - `content:localize:images`: downloads supplier media and rewrites product/category media URLs to local files in `public/assets/supplier` (with automatic proxy fallback if direct supplier access is blocked).
 - `content:audit`: strict integrity check (FR/DE presence, specs, palettes, local media URLs).
-- `content:audit:strict`: production-readiness check (fails on placeholder specs/text and insufficient palette coverage).
+- `content:audit:strict`: release-readiness check (fails on placeholder specs/text and insufficient palette coverage).
 - `release:check`: full gate (content audits + lint + typecheck + tests + build).
 - End-to-end operator checklist: `docs/supplier-sync-runbook.md`.
 
-### How Sync Affects Production
+### How Sync Affects Staging
 
 - Sync scripts are **build-time/offline tools**. They update `src/data/content.local.json`.
-- Production site serves static files only (`next build` + export). It does not call supplier site at runtime.
-- If supplier sync fails (network/source unavailable), production keeps working with last valid local content.
+- Staging site serves static files only (`next build` + export). It does not call supplier site at runtime.
+- If supplier sync fails (network/source unavailable), staging keeps working with last valid local content.
 
 ## Hetzner Deployment
 
 CI workflow uploads static export (`out/`) via SFTP:
 
 - push to `main` -> staging deploy
-- tag `v*` -> production deploy
-- post-deploy smoke checks run automatically for staging and production
+- post-deploy smoke checks run automatically for staging
+- any non-staging deploy is intentionally disabled (out of scope right now)
 
 Required GitHub secrets are documented in `docs/deploy-hetzner.md`.
 
@@ -130,10 +130,10 @@ Security headers for static hosting are provided via `public/.htaccess`.
 
 ## Legal and Compliance
 
-Legal pages are present in FR/DE with placeholders:
+Legal pages are present in FR/DE:
 
 - `/fr/impressum`, `/de/impressum`
 - `/fr/datenschutz`, `/de/datenschutz`
 - `/fr/cookies`, `/de/cookies`
 
-Before production cutover, replace placeholders with official legal/company details.
+Before go-live, verify legal/company details are correct for FR/DE.

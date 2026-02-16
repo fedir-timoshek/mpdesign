@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - "v*"
   pull_request:
 
 concurrency:
@@ -56,11 +54,11 @@ jobs:
           NEXT_PUBLIC_LEAD_ENDPOINT: ${{ secrets.NEXT_PUBLIC_LEAD_ENDPOINT }}
           NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN: ${{ secrets.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN }}
           CONTENT_API_URL: ${{ secrets.CONTENT_API_URL }}
-          SITE_DEPLOY_ENV: ${{ startsWith(github.ref, 'refs/tags/v') && 'production' || 'staging' }}
+          SITE_DEPLOY_ENV: staging
         run: npm run build
 
       - name: Upload build artifact
-        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: static-out
@@ -121,74 +119,6 @@ jobs:
           set -euo pipefail
           if [ -z "${SMOKE_BASE_URL:-}" ]; then
             echo "Missing HETZNER_STAGING_URL secret."
-            exit 1
-          fi
-          bash scripts/smoke-check.sh "$SMOKE_BASE_URL"
-
-  deploy_production:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: quality
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download build artifact
-        if: ${{ !contains(github.ref_name, 'legacy') }}
-        uses: actions/download-artifact@v4
-        with:
-          name: static-out
-          path: out
-
-      - name: Prepare legacy production site
-        if: ${{ contains(github.ref_name, 'legacy') }}
-        run: |
-          rm -rf out
-          mkdir -p out
-          rsync -a legacy-prod-site/ out/
-          # Keep deploy script compatible with the standard export flow.
-          mkdir -p out/_next out/assets
-
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-
-      - name: Deploy to Hetzner production via SFTP
-        env:
-          HETZNER_HOST: ${{ secrets.HETZNER_HOST }}
-          HETZNER_USERNAME: ${{ secrets.HETZNER_USERNAME }}
-          HETZNER_PASSWORD: ${{ secrets.HETZNER_PASSWORD }}
-          HETZNER_PATH: ${{ secrets.HETZNER_PRODUCTION_PATH }}
-        run: |
-          # Normalize legacy Hetzner paths.
-          # On Hetzner Webhosting, the SFTP user home typically maps to `public_html/`,
-          # so paths like `public_html` should actually be `/`.
-          REMOTE_PATH="${HETZNER_PATH#public_html/}"
-          REMOTE_PATH="${REMOTE_PATH#public_html}"
-          if [ -z "$REMOTE_PATH" ]; then
-            REMOTE_PATH="/"
-          fi
-          case "$REMOTE_PATH" in
-            /*) : ;;
-            *) REMOTE_PATH="/$REMOTE_PATH" ;;
-          esac
-
-          lftp -u "$HETZNER_USERNAME","$HETZNER_PASSWORD" sftp://$HETZNER_HOST <<LFTP
-          set sftp:auto-confirm yes
-          # Upload hashed assets first so HTML never points to missing chunks during deploy.
-          mirror -R --parallel=2 out/_next "$REMOTE_PATH/_next"
-          mirror -R --parallel=2 out/assets "$REMOTE_PATH/assets"
-          mirror -R --parallel=2 out "$REMOTE_PATH"
-          bye
-          LFTP
-
-      - name: Smoke check production
-        env:
-          SMOKE_BASE_URL: ${{ secrets.HETZNER_PRODUCTION_URL }}
-        run: |
-          set -euo pipefail
-          if [ -z "${SMOKE_BASE_URL:-}" ]; then
-            echo "Missing HETZNER_PRODUCTION_URL secret."
             exit 1
           fi
           bash scripts/smoke-check.sh "$SMOKE_BASE_URL"
