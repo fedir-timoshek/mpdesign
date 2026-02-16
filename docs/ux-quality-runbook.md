@@ -19,5 +19,5 @@ npm run test:e2e:ux
 
 ## Release Rule
 
-- `test:e2e:ux` must be green before pushing to `main` (staging deploy).
+- `test:e2e:ux` must be green before pushing to `main` (staging deploy) and before any go-live.
 - If it fails, fix UX interaction first and rerun full `npm run release:check`.

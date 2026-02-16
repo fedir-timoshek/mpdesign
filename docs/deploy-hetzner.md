@@ -1,25 +1,43 @@
-# Hetzner Deployment (Staging Only: GitHub Actions + SFTP)
+# Hetzner Deployment (Staging + Guarded Production: GitHub Actions + SFTP)
 
-This repository is currently **staging-only**.
+This repository deploys to **staging** on every push to `main`.
 
 - Push to `main` -> staging deploy
-- Production deploy is intentionally disabled (out of scope right now).
+- Production deploy exists but is intentionally **guarded** and **must not be used** until explicit go-live.
 
-## Required GitHub Secrets (Staging)
+## Required GitHub Secrets
 
 - `HETZNER_HOST`
 - `HETZNER_USERNAME`
 - `HETZNER_PASSWORD`
+
+Staging:
 - `HETZNER_STAGING_PATH` (example `/staging`)
 - `HETZNER_STAGING_URL` (example `https://staging.example.com` or `https://example.com/staging`)
-- `NEXT_PUBLIC_SITE_URL` (set to the staging canonical URL)
+
+Production (keep unset / unused until go-live):
+- `HETZNER_PRODUCTION_PATH` (example `/`)
+- `HETZNER_PRODUCTION_URL` (example `https://example.com`)
+
+Shared:
+- `NEXT_PUBLIC_SITE_URL` (canonical public domain; can be production even for staging because staging is noindex)
 - `NEXT_PUBLIC_LEAD_ENDPOINT`
 - `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` (optional)
 - `CONTENT_API_URL` (optional)
 
 Notes:
 - On Hetzner Webhosting, the SFTP user home directory typically maps to `public_html/`.
-  That is why `HETZNER_STAGING_PATH` is usually `/staging` (not `/public_html/staging`).
+  That is why paths are usually `/` and `/staging` (not `/public_html/...`).
+
+## Production Guardrail
+
+The GitHub Actions job `deploy_production` is guarded by a secret:
+
+- `PRODUCTION_DEPLOY_ENABLED` must be set to `1` for the production job to run.
+
+Rule:
+
+- Keep `PRODUCTION_DEPLOY_ENABLED` **unset** until you explicitly approve go-live.
 
 ## Build Artifact
 
@@ -48,7 +66,7 @@ Recommended baseline headers (via Cloudflare if needed):
 
 ## Post-Deploy Smoke Protocol
 
-Workflow runs `bash scripts/smoke-check.sh "<base-url>"` after staging deploy.
+Workflow runs `bash scripts/smoke-check.sh "<base-url>"` after deploy.
 
 Checks:
 - `robots.txt`, `sitemap.xml`
@@ -65,8 +83,16 @@ npm run smoke:site -- https://example.com
 
 ## Rollback
 
+Staging:
+
 1. Re-run the last successful `CI-CD` workflow run for `main` (staging deploy).
 2. If you need a manual rollback, upload a previous `out/` snapshot via SFTP to the staging path.
+3. Re-run smoke checks against the restored version.
+
+Production:
+
+1. Re-run the last successful production workflow run (only after go-live).
+2. If needed, upload a previous `out/` snapshot via SFTP to the production path.
 3. Re-run smoke checks against the restored version.
 
 ## Notes About Consistent Deploys

@@ -1,4 +1,4 @@
-# Release Checklist (Staging Only)
+# Release Checklist (Staging -> Production)
 
 ## A. Team-Only Gates (no client input required)
 
@@ -37,15 +37,34 @@
 - [ ] form submit returns `{ ok: true }`
 - [ ] row appears in Sheets
 - [ ] 1 Telegram message received
- 
-## D. Post-Release Monitoring (first 7 days)
+
+## D. Production Cutover (Guarded, Do Not Run Until Go-Live)
+
+Precondition:
+
+- [ ] You explicitly approve go-live.
+- [ ] Set GitHub Secret `PRODUCTION_DEPLOY_ENABLED=1` (see `docs/deploy-hetzner.md`).
+
+Steps:
+
+- [ ] In GitHub Actions, run workflow `CI-CD` manually (`workflow_dispatch`) on `main` with `deploy_env=production`.
+- [ ] Production deploy job success (`deploy_production`)
+- [ ] Production smoke checks success (`Smoke check production`)
+- [ ] Manual live checks:
+- [ ] `/fr/` and `/de/` load (200)
+- [ ] `robots.txt` allows crawling and references sitemap
+- [ ] `sitemap.xml` loads (200)
+- [ ] Lead submit works (form -> Sheets -> Telegram)
+
+## E. Post-Release Monitoring (first 7 days)
 
 - [ ] Daily lead pipeline check (form -> Sheets -> Telegram)
 - [ ] Daily 404/critical page check
 - [ ] Weekly review of CTA analytics events (WhatsApp/Call/Form)
 
-## E. Rollback
+## F. Rollback
 
-- [ ] Re-run workflow for last stable `main` commit
+- [ ] Staging: re-run workflow for last stable `main` commit
+- [ ] Production: re-run last stable production workflow run (only after go-live)
 - [ ] If needed, upload previous `out/` artifact manually via SFTP
 - [ ] Re-run smoke check against restored version

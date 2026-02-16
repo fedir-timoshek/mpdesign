@@ -104,7 +104,8 @@ npm run content:audit:strict
 2. Push to `main` for staging deploy.
 3. Confirm workflow step `Smoke check staging` is green.
 4. Validate lead pipeline manually on staging (form -> Sheets -> Telegram).
-5. Start 7-day post-release monitoring.
+5. When go-live is explicitly approved: run guarded production deploy (see `docs/release-checklist.md`).
+6. Start 7-day post-release monitoring.
 
 ## Go-Live Smoke Protocol
 
@@ -126,28 +127,28 @@ Manual local example:
 npm run smoke:site -- https://example.com
 ```
 
-## How Sync Affects Staging (Short Version)
+## How Sync Affects The Live Site (Short Version)
 
 - Sync scripts modify only repository data (`src/data/content.local.json`) and local assets (`public/assets/supplier`).
-- Staging website changes only after:
+- The deployed website changes only after:
 1. Committing updated files to GitHub.
 2. CI passing.
-3. Deployment to staging.
+3. Deployment (staging or production).
 - If no deploy happened, running sync locally does not affect live site.
 
 ## Current Blocking Signals To Watch
 
 - `content:audit` fails if any supplier image is still remote (`https://www.witraz.eu/...`).
 - `content:audit:strict` fails if product specs still contain placeholders like `A confirmer` / `Zu bestaetigen`.
-- Treat these two failures as hard blockers for staging deploy.
+- Treat these two failures as hard blockers for any deploy.
 
-## User-Provided Inputs Needed Before Staging Deploy
+## User-Provided Inputs Needed Before Deploy
 
 - Final legal/company details for FR/DE legal pages.
 - Final contact values (phone, WhatsApp, email).
 - Cloudflare token for analytics (optional).
-- Hetzner staging credentials in GitHub secrets.
-- Staging public URL for smoke checks (`HETZNER_STAGING_URL`).
+- Hetzner credentials in GitHub secrets.
+- Public URLs for smoke checks (`HETZNER_STAGING_URL` and later `HETZNER_PRODUCTION_URL`).
 
 ## Rollback Procedure
 

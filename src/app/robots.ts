@@ -4,7 +4,7 @@ import { getPublicSiteUrl } from "@/lib/site-url";
 export const dynamic = "force-static";
 
 const baseUrl = getPublicSiteUrl();
-const deployEnv = process.env.SITE_DEPLOY_ENV || "staging";
+const deployEnv = process.env.SITE_DEPLOY_ENV || "production";
 
 export default function robots(): MetadataRoute.Robots {
   if (deployEnv === "staging") {

@@ -110,11 +110,11 @@ npm run content:audit
 - `release:check`: full gate (content audits + lint + typecheck + tests + build).
 - End-to-end operator checklist: `docs/supplier-sync-runbook.md`.
 
-### How Sync Affects Staging
+### How Sync Affects The Live Site
 
 - Sync scripts are **build-time/offline tools**. They update `src/data/content.local.json`.
-- Staging site serves static files only (`next build` + export). It does not call supplier site at runtime.
-- If supplier sync fails (network/source unavailable), staging keeps working with last valid local content.
+- The deployed site serves static files only (`next build` + export). It does not call supplier site at runtime.
+- If supplier sync fails (network/source unavailable), the live site keeps working with last valid local content.
 
 ## Hetzner Deployment
 
@@ -122,7 +122,7 @@ CI workflow uploads static export (`out/`) via SFTP:
 
 - push to `main` -> staging deploy
 - post-deploy smoke checks run automatically for staging
-- any non-staging deploy is intentionally disabled (out of scope right now)
+- production deploy exists but is intentionally guarded and must not be used until go-live is approved
 
 Required GitHub secrets are documented in `docs/deploy-hetzner.md`.
 

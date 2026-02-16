@@ -1,13 +1,14 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { trackCtaEvent } from "@/lib/analytics";
 import { contactConfig, localizedLeadForm } from "@/lib/site-config";
 import { Locale } from "@/types/content";
 
 type Props = {
   locale: Locale;
-  sourcePage: string;
+  sourcePage?: string | undefined;
   productSlug?: string | undefined;
 };
 
@@ -22,8 +23,31 @@ type FormState = {
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
+function normalizeSourcePage(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "";
+  }
+  return trimmed.endsWith("/") ? trimmed : `${trimmed}/`;
+}
+
+function getProductSlugFromPath(locale: Locale, pathname: string) {
+  const prefix = `/${locale}/products/`;
+  if (!pathname.startsWith(prefix)) {
+    return undefined;
+  }
+
+  const rest = pathname.slice(prefix.length);
+  const slug = rest.split("/").filter(Boolean)[0];
+  return slug || undefined;
+}
+
 export function LeadForm({ locale, sourcePage, productSlug }: Props) {
   const copy = localizedLeadForm[locale];
+  const pathname = usePathname() || "";
+  const resolvedSourcePage =
+    normalizeSourcePage(sourcePage || pathname) || `/${locale}/`;
+  const resolvedProductSlug = productSlug ?? getProductSlugFromPath(locale, pathname);
   const [state, setState] = useState<FormState>({
     name: "",
     phone: "",
@@ -44,8 +68,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
       channel: "form",
       placement: "lead_form",
       locale,
-      sourcePage,
-      productSlug,
+      sourcePage: resolvedSourcePage,
+      productSlug: resolvedProductSlug,
       status: "attempt",
     });
 
@@ -56,8 +80,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
         channel: "form",
         placement: "lead_form",
         locale,
-        sourcePage,
-        productSlug,
+        sourcePage: resolvedSourcePage,
+        productSlug: resolvedProductSlug,
         status: "error",
         reason: "required_fields",
       });
@@ -71,8 +95,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
         channel: "form",
         placement: "lead_form",
         locale,
-        sourcePage,
-        productSlug,
+        sourcePage: resolvedSourcePage,
+        productSlug: resolvedProductSlug,
         status: "error",
         reason: "consent_required",
       });
@@ -86,8 +110,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
         channel: "form",
         placement: "lead_form",
         locale,
-        sourcePage,
-        productSlug,
+        sourcePage: resolvedSourcePage,
+        productSlug: resolvedProductSlug,
         status: "error",
         reason: "missing_endpoint",
       });
@@ -99,8 +123,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
 
     const payload = {
       locale,
-      sourcePage,
-      productSlug,
+      sourcePage: resolvedSourcePage,
+      productSlug: resolvedProductSlug,
       name: state.name.trim(),
       phone: state.phone.trim(),
       email: state.email.trim(),
@@ -132,8 +156,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
         channel: "form",
         placement: "lead_form",
         locale,
-        sourcePage,
-        productSlug,
+        sourcePage: resolvedSourcePage,
+        productSlug: resolvedProductSlug,
         status: "success",
       });
       setState({
@@ -151,8 +175,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
         channel: "form",
         placement: "lead_form",
         locale,
-        sourcePage,
-        productSlug,
+        sourcePage: resolvedSourcePage,
+        productSlug: resolvedProductSlug,
         status: "error",
         reason: "network_or_backend",
       });
@@ -277,8 +301,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
               channel: "whatsapp",
               placement: "lead_form",
               locale,
-              sourcePage,
-              productSlug,
+              sourcePage: resolvedSourcePage,
+              productSlug: resolvedProductSlug,
             })
           }
         >
@@ -292,8 +316,8 @@ export function LeadForm({ locale, sourcePage, productSlug }: Props) {
               channel: "call",
               placement: "lead_form",
               locale,
-              sourcePage,
-              productSlug,
+              sourcePage: resolvedSourcePage,
+              productSlug: resolvedProductSlug,
             })
           }
         >

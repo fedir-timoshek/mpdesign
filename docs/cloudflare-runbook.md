@@ -1,9 +1,12 @@
-# Cloudflare Runbook (Staging: DNS + SSL + Web Analytics)
-
-This repository currently targets **staging only**.
+# Cloudflare Runbook (DNS + SSL + Web Analytics)
 
 Important: Cloudflare is configured at the **zone** level (the apex domain), even if you only use the
-`staging.<domain>` subdomain.
+`staging.<domain>` subdomain right now.
+
+Domains:
+
+- `mpdesign-windows.ch` (canonical, no `www`)
+- `staging.mpdesign-windows.ch` (staging)
 
 ## 1) Add Site
 
@@ -31,6 +34,14 @@ Notes:
 Create/confirm these records in **Cloudflare -> DNS**:
 
 - `A` record:
+  - Name: `@`
+  - Value: `78.46.157.243`
+  - Proxy: **Proxied** (orange cloud)
+- `AAAA` record:
+  - Name: `@`
+  - Value: `2a01:4f8:d0a:52c6::2`
+  - Proxy: **Proxied**
+- `A` record:
   - Name: `staging`
   - Value: `78.46.157.243`
   - Proxy: **Proxied**
@@ -49,17 +60,23 @@ In **Cloudflare -> SSL/TLS**:
 
 Important:
 
-- For staging, HSTS is not needed. Keep it off.
+- Do not enable HSTS until production go-live is confirmed to work correctly over HTTPS end-to-end.
 
-## 5) Web Analytics (Staging)
+## 5) Redirects (Recommended)
+
+In **Cloudflare -> Rules -> Redirect Rules**:
+
+- Redirect `www.mpdesign-windows.ch/*` -> `https://mpdesign-windows.ch/$1` (301)
+
+## 6) Web Analytics
 
 1. Go to **Cloudflare -> Analytics & Logs -> Web Analytics**.
-2. Create a site for `staging.mpdesign-windows.ch`.
+2. Create a site for `mpdesign-windows.ch`.
 3. Copy the **token**.
 4. Put the token into GitHub Secrets as:
    - `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`
 
-## 7) Verify
+## 7) Verify (Staging)
 
 After a staging deploy, open:
 
